@@ -1,8 +1,8 @@
 ## Find transcripts that map to a hotspot
 ## chr & pos are vectors of the same length
 ## chr must be as.character()
-probes.bypos <- function(chr,pos,maxlod.out,
-                         sigpos.out,
+probes.bypos <- function(chr,pos,sigpos.out,
+                         maxlod.out,
                          peaks.out,win=5){
   results.out <- NULL
   for(i in 1:length(chr)){

@@ -41,15 +41,15 @@ peaks <- function(maxlod.out,sigpos.out,
   pklod.trans <- mapply(function(pklod,d) pklod[is.na(d) | d>win/2],
                  maxlod.knownloc,dpos)
 
-  peaks.unlist <- function(pkpos,pklod,cis=1)
+  peaks.unlist <- function(pkpos,pklod)
     data.frame(id=unlist(lapply(pkpos,names)),
        peak.chr=factor(rep(names(pkpos),
          unlist(lapply(pkpos,length))),levels=names(pkpos)),
        do.call(rbind,mapply(function(pos,lod)
                cbind(peak.pos=pos,peak.lod=lod),pkpos,pklod)),
-       cis=cis,row.names=NULL)
-  peaks.data.frame <- rbind(peaks.unlist(pkpos.cis,pklod.cis),
-                    peaks.unlist(pkpos.trans,pklod.trans,cis=0))
+       row.names=NULL)
+  peaks.data.frame <- rbind(cbind(peaks.unlist(pkpos.cis,pklod.cis),cis=1),
+                    cbind(peaks.unlist(pkpos.trans,pklod.trans),cis=0))
   peaks.data.frame[,paste("probe",c("chr","pos"),sep=".")] <-
                    annot[match(peaks.data.frame$id,rownames(annot)),]
   
