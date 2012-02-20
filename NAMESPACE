@@ -1,0 +1,15 @@
+useDynLib(neqtl)
+
+# functions to export
+export(maxlod, maxlod.sigpos)
+export(nullsims)
+export(neqtl)
+export(smoothall)
+export(runningmean,runningratio)
+export(findpeaks)
+export(probes.bypos)
+
+
+# functions to import
+importFrom(stats, rnorm)
+importFrom(qtl, scanone)

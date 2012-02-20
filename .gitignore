@@ -1,0 +1,4 @@
+.Rhistory
+*.o
+*.so
+*~
