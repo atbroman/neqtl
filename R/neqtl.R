@@ -3,7 +3,7 @@ neqtl <- function(maxlod.out,chr,pos,win=5)
      smoothall(maxlod$maxlod.sig.pos,chr,pos,window=5)
 
 smoothall <-
-function(themax=islet.max, thechr=chr, thepos=pos, window=5)
+function(themax, thechr, thepos, window=5)
 {
   thesmooth <- vector("list", length(themax))
   names(thesmooth) <- names(themax)

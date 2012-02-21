@@ -22,23 +22,23 @@ Threshold used to determine significant LOD score, see
 \code{\link{nullsims}} function
 }
 }
-\details{
+%\details{
 %%  ~~ If necessary, more details than the description above ~~
-}
+%}
 \value{
 List with n vectors of m1 positions, where n is the
   number of chromosmes in \code{scanone} and m1 is the number of traits
   with maximum LOD score above a given threshold}
-}
+
 \references{
-Jansen, Risart ??
+Jansen, Risert ??
 }
 \author{
   Karl W. Broman and Aimee Teo Broman
   }
-\note{
+%\note{
 %%  ~~further notes~~
-}
+%}
 
 \seealso{
 \code{\link{maxlod}}

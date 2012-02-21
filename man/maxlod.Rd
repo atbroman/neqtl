@@ -16,8 +16,8 @@ maxlod(scan.out)
  \item{scan.out}{An object of class \code{scanone}. See
    \code{\link[qtl]{scanone}} for details.}
 }
-\details{
-}
+%\details{
+%}
 \value{
 Returns list of 
 \item{maxlod}{matrix of maximum LOD, made up of n rows and m columns,
@@ -26,9 +26,9 @@ Returns list of
 \item{maxlod.pos}{List with n vectors of m positions, where n is the
   number of chromosmes in \code{scanone} and m is the number of traits}
 }
-\references{
+%\references{
 %% ~put references to the literature/web site here ~
-}
+%}
 \author{
 Karl W. Broman and Aimee Teo Broman
 }
@@ -39,9 +39,9 @@ Karl W. Broman and Aimee Teo Broman
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
-\seealso{
+%\seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
-}
+%}
 \examples{
 data(fake.bc)
 fake.bc <- calc.genoprob(fake.bc, step=2.5)
