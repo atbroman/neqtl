@@ -18,17 +18,17 @@ nullsims(cross, n.sim = 1000, n.batch = 4, verbose = TRUE, ...)
  \item{n.sim}{Number of simulations to run, default is 1000}
   \item{n.batch}{Number of batches, n.sim / n.batch should be around ~250}
   \item{verbose}{TRUE or FALSE, prints batch number}
-  \item{\dots}{Additional parameters for \code{\link[qtl]{scanone}}
-}
-\details{
+  \item{\dots}{Additional parameters for \code{\link[qtl]{scanone}}}}
+
+%\details{
 %%  ~~ If necessary, more details than the description above ~~
-}
+%}
 \value{
 A numeric vector of maximum LOD scores, of length \code{n.sim}
 }
-\references{
+%\references{
 %% ~put references to the literature/web site here ~
-}
+%}
 \author{
   Karl W. Broman and Aimee Teo Broman
 }

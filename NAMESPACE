@@ -4,8 +4,6 @@ useDynLib(neqtl)
 export(maxlod, maxlod.sigpos)
 export(nullsims)
 export(neqtl)
-export(smoothall)
-export(runningmean,runningratio)
 export(findpeaks)
 export(probes.bypos)
 
