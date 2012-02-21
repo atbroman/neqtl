@@ -32,9 +32,9 @@ Numeric value for window size; transcript positions with significant LOD
   scores within +/- 1/2 \code{win} of \code{chr}, \code{pos} are output
 }
 }
-\details{
+%\details{
 %%  ~~ If necessary, more details than the description above ~~
-}
+%}
 \value{
   Output is a \code{data.frame} with values:
   \item{index}{Index of chr/pos vector}
@@ -50,21 +50,21 @@ Numeric value for window size; transcript positions with significant LOD
   definition, 0 if trans, and NA if unknown}
 
 }
-\references{
+%\references{
 %% ~put references to the literature/web site here ~
-}
+%}
 \author{
   Karl W. Broman and Aimee Teo Broman
 }
-\note{
+%\note{
 %%  ~~further notes~~
-}
+%}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
-\seealso{
+%\seealso{
 %% ~~objects to See Also as \code{\link{help}}, ~~~
-}
+%}
 \examples{
 data(fake.bc)
 fake.bc <- calc.genoprob(fake.bc, step=2.5)
