@@ -21,20 +21,19 @@ Output from \code{\link{maxlod.sigpos}} function
 }
   \item{annot}{
     A data.frame consisting of two columns:
-    \item{chr}{Chromosme name, as a factor, with levels in the same
+    \code{chr} (Chromosome name, as a factor, with levels in the same
       order as the original \code{\link{scanone}} object.  Additional
-      levels may be added at the end}
-    \item{pos}{Position of trait in the same units as
-      \code{\link{scanone}} object
-     \item{rownames(annot)}{Trait ID, same as pheno names in original
-       cross object}
-}
+      levels may be added at the end) and 
+    \code{pos} (Position of trait in the same units as
+      \code{\link{scanone}} object).
+     The rownames should be the trait IDs, same as pheno names in original
+       cross object.}
   \item{win}{Window size, in same units as \code{scanone} object
     (e.g. cM or Mb)}
 }
-\details{
+%\details{
 %%  ~~ If necessary, more details than the description above ~~
-}
+%}
 \value{
 Returns a list corresponding to the number of chromosomes:
  \item{peakpos}{List of maximum LOD positions, named by trait, with
@@ -62,15 +61,15 @@ Returns a list corresponding to the number of chromosomes:
    to linkage, columns named "probe" refer to annotation.  This object
    can be used for plotting.}
 }
-\references{
+%\references{
 %% ~put references to the literature/web site here ~
-}
+%}
 \author{
 Karl W. Broman and Aimee Teo Broman
 }
-\note{
+%\note{
 %%  ~~further notes~~
-}
+%}
 
 \seealso{
 \code{\link[qtlview]{cistrans}}
@@ -99,4 +98,4 @@ names(peaks.view) <- c("id","peak.chr","peak.pos.cM","peak.score",
 gmap <- pull.map(fake.bc)
 plot(cistrans(peaks.view,cross.name="fake.bc",use.cM=TRUE,peak.chr=1:6,
 trait.chr=1:6,map=list(Mb.map=gmap,cM.map=gmap)),show.cumscore=FALSE,pch=16,cex=5)
-
+}
