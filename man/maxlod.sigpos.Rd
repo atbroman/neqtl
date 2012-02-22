@@ -44,11 +44,11 @@ Jansen, Risert ??
 \code{\link{maxlod}}
 }
 \examples{
-data(fake.bc)
-fake.bc <- calc.genoprob(fake.bc, step=2.5)
+data(multitrait)
+multitrait <- calc.genoprob(multitrait, step=2)
 
-scanone.bc <- scanone(fake.bc,pheno.col=1:2)
-maxlod.bc <- maxlod(scanone.bc)
-maxlod.sigpos(maxlod.bc,sig.lod=3)
+scan.multi <- scanone(multitrait,pheno.col=1:nphe(multitrait))
+maxlod.multi <- maxlod(scan.multi)
+maxlod.sigpos(maxlod.multi,sig.lod=4)
 
 }

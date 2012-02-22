@@ -4,10 +4,9 @@ useDynLib(neqtl)
 export(maxlod, maxlod.sigpos)
 export(nullsims)
 export(neqtl)
-export(findpeaks)
-export(probes.bypos)
-export(peaks)
-
+export(findmax)
+export(findmax.traits)
+export(maxlod.cistrans)
 
 # functions to import
 importFrom(stats, rnorm)

@@ -1,6 +1,6 @@
 
-neqtl <- function(maxlod.out,chr,pos,win=5)
-     smoothall(maxlod$maxlod.sig.pos,chr,pos,window=5)
+neqtl <- function(sigpos.out,chr,pos,win=5)
+     smoothall(sigpos.out,chr,pos,window=5)
 
 smoothall <-
 function(themax, thechr, thepos, window=5)
