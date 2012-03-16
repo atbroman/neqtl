@@ -39,11 +39,12 @@ Karl W. Broman and Aimee Teo Broman
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
-%\seealso{
+\seealso{
 \code{\link{maxlod.sigpos}}
 \code{\link{maxlod.cistrans}}
 \code{\link{findmax.traits}}
-%}
+}
+
 \examples{
 data(fake.bc)
 fake.bc <- calc.genoprob(fake.bc, step=2.5)
