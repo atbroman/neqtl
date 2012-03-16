@@ -34,14 +34,14 @@ Karl W. Broman and Aimee Teo Broman
 }
 \note{
  Output from is mainly used in subsequent functions \code{maxlod.sigpos},
-  \code{maxlod.cistrans}, and \code{findmax.traits}
+  \code{peaks}, and \code{findmax.traits}
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
 \code{\link{maxlod.sigpos}}
-\code{\link{maxlod.cistrans}}
+\code{\link{peaks}}
 \code{\link{findmax.traits}}
 }
 

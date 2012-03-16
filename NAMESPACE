@@ -6,7 +6,7 @@ export(nullsims)
 export(neqtl)
 export(findmax)
 export(findmax.traits)
-export(maxlod.cistrans)
+export(peaks)
 export(plotpeaks)
 
 # functions to import

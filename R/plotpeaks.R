@@ -1,5 +1,5 @@
 ## Adjusted from qtlview:::plot.cistrans() author Brian Yandell ##
-## pos.peaks = peaks element from maxlod.cistrans() function ##
+## pos.peaks = peaks element from peaks() function ##
 ## ... are additional parameters to plot() and points() ##
 ## Colors are divided by equal quantiles of the LOD scores ##
 ## col.legend adds a color legend values are TRUE, FALSE, or a

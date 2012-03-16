@@ -6,7 +6,7 @@
 ## maxlod.out is output of maxlod() (formerly maxlod and maxlod.pos)
 ## sigpos.out is output of sigpos() (formerly maxlod5.pos)
 
-maxlod.cistrans <- function(maxlod.out,sigpos.out,
+peaks <- function(maxlod.out,sigpos.out,
                           annot,win=5){
   annot.chr <- annot[,1]
   annot.pos <- annot[,2]

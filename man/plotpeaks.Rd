@@ -7,7 +7,7 @@ Plot position of trait vs. position of QTL
 \description{
 Plots trait position, based on annotation against position of QTL, based
 on position of maximum LOD score.  Uses output from
-\code{maxlod.cistrans} function, CIS traits are shown in grayscale.
+\code{peaks} function, CIS traits are shown in grayscale.
 }
 \usage{
 plotpeaks(pos.peaks,
@@ -25,7 +25,7 @@ q.legend = c(0.025, 0.25, 0.5, 0.75, 0.975), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
-  \item{pos.peaks}{\code{peaks} element from \code{maxlod.cistrans}
+  \item{pos.peaks}{\code{peaks} element from \code{peaks}
     function. \code{peaks} is a data.frame}
   \item{map}{\code{map} object from cross object, used to determine
     chromosome lengths; if not available, estimated from pos.peaks}
@@ -64,7 +64,7 @@ Brian Yandell and Aimee Teo Broman
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-  \code{\link{maxlod.cistrans}}
+  \code{\link{peaks}}
   \code{\link[qtlview]{cistrans}} (from qtlview library)
 }
 \examples{
@@ -80,7 +80,7 @@ scanone.bc <- scanone(fake.bc,pheno.col=1:2)
 maxlod.bc <- maxlod(scanone.bc)
 sig.bc <- maxlod.sigpos(maxlod.bc,sig.lod=3)
 
-peaks.bc <- maxlod.cistrans(maxlod.bc,sig.bc,annot.bc)
+peaks.bc <- peaks(maxlod.bc,sig.bc,annot.bc)
 
 plotpeaks(peaks.bc$peaks)
 

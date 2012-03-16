@@ -25,7 +25,7 @@ List of positions with significant LOD scores from \code{\link{maxlod.sigpos}} f
 Optional list output from \code{\link{maxlod}} function
 }
   \item{peaks.out}{
-Optional list output from \code{\link{maxlod.cistrans}} function
+Optional list output from \code{\link{peaks}} function
 }
   \item{win}{
 Numeric value for window size; trait positions with significant LOD
@@ -50,8 +50,8 @@ Numeric value for window size; trait positions with significant LOD
   output from \code{maxlod.sigpos}}
   \item{lod}{if \code{maxlod} dataset is provided, maximum LOD score for
   traits is included}
-  \item{cis}{if \code{maxlod.cistrans} dataset is provided, identifier for CIS
-  trait is provided: cis=1 is CIS trait, based on \code{maxlod.cistrans}
+  \item{cis}{if \code{peaks} dataset is provided, identifier for CIS
+  trait is provided: cis=1 is CIS trait, based on \code{peaks}
   definition, 0 if trans, and NA if unknown}
 
 }

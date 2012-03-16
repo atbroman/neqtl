@@ -44,7 +44,7 @@ Jansen, Risert ??
   \code{\link{maxlod}}
   \code{\link{neqtl}}
   \code{\link{findmax.traits}}
-  \code{\link{maxlod.cistrans}}
+  \code{\link{peaks}}
 }
 \examples{
 data(multitrait)
