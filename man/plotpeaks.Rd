@@ -1,5 +1,5 @@
-\name{plot.cistrans}
-\alias{plot.cistrans}
+\name{plotpeaks}
+\alias{plotpeaks}
 
 \title{
 Plot position of trait vs. position of QTL
@@ -10,7 +10,7 @@ on position of maximum LOD score.  Uses output from
 \code{maxlod.cistrans} function, CIS traits are shown in grayscale.
 }
 \usage{
-plot.cistrans(pos.peaks, map=NULL,n.col = 256, cbreaks = quantile(pos.peaks$peaks.lod, probs = seq(0, 1, length = n.col + 1)), chr.peaks = levels(factor(pos.peaks$peaks.chr,exclude=NULL)), chr.trait = levels(factor(pos.peaks$trait.chr,exclude=NULL)), xlab = "Chromosome of Peak Score", ylab = "Chromosome of Transcript", col.legend = TRUE, lims.legend = c(-0.08, 0.3), q.legend = c(0.025, 0.25, 0.5, 0.75, 0.975), ...)
+plotpeaks(pos.peaks, map=NULL,n.col = 256, cbreaks = quantile(pos.peaks$peaks.lod, probs = seq(0, 1, length = n.col + 1)), chr.peaks = levels(factor(pos.peaks$peaks.chr,exclude=NULL)), chr.trait = levels(factor(pos.peaks$trait.chr,exclude=NULL)), xlab = "Chromosome of Peak Score", ylab = "Chromosome of Transcript", col.legend = TRUE, lims.legend = c(-0.08, 0.3), q.legend = c(0.025, 0.25, 0.5, 0.75, 0.975), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -71,7 +71,7 @@ sig.bc <- maxlod.sigpos(maxlod.bc,sig.lod=3)
 
 peaks.bc <- maxlod.cistrans(maxlod.bc,sig.bc,annot.bc)
 
-plot.cistrans(peaks.bc$peaks)
+plotpeaks(peaks.bc$peaks)
 
 ## Using qtlview ##
 #peaks <-peaks.bc$peaks

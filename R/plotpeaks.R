@@ -6,7 +6,7 @@
 ## vector of the form c(xlim1,xlim2) as a proportion of 
 ## the plotting area
 
-plot.cistrans <- function(pos.peaks, map=NULL, n.col=256,
+plotpeaks <- function(pos.peaks, map=NULL, n.col=256,
      cbreaks=quantile(pos.peaks$peaks.lod,probs=seq(0,1,length=n.col+1)),
      chr.peaks=levels(factor(pos.peaks$peaks.chr,exclude=NULL)),
      chr.trait=levels(factor(pos.peaks$trait.chr,exclude=NULL)),
