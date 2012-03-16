@@ -72,7 +72,7 @@ Karl W. Broman and Aimee Teo Broman
 %}
 
 \seealso{
-  \code{\link{plot.cistrans}}
+  \code{\link{plotpeaks}}
 }
 \examples{
 data(fake.bc)
