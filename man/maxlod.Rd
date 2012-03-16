@@ -21,7 +21,7 @@ maxlod(scan.out)
 \value{
 Returns list of 
 \item{maxlod}{matrix of maximum LOD, made up of n rows and m columns,
-  where m is the number of chromosomes in \code{scanone} object and m
+  where n is the number of chromosomes in \code{scanone} object and m
   is the number of traits}
 \item{maxlod.pos}{List with n vectors of m positions, where n is the
   number of chromosmes in \code{scanone} and m is the number of traits}
@@ -33,14 +33,16 @@ Returns list of
 Karl W. Broman and Aimee Teo Broman
 }
 \note{
- Output from \code{maxlod} is mainly used in subsequent functions
- \code{neqtl} and \code{peaks}
+ Output from is mainly used in subsequent functions \code{maxlod.sigpos},
+  \code{maxlod.cistrans}, and \code{findmax.traits}
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 %\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
+\code{\link{maxlod.sigpos}}
+\code{\link{maxlod.cistrans}}
+\code{\link{findmax.traits}}
 %}
 \examples{
 data(fake.bc)

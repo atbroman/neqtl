@@ -18,18 +18,17 @@ Output from \code{\link{maxlod.sigpos}} function, a list of positions of
 significant maximum LOD scores
 }
   \item{chr}{
-Vector of chromosomes (as a factor) for count, corresponding to \code{pos},
-e.g. first column of \code{scanone} object
+Vector of chromosomes (as a factor) for count, corresponding to pos,
+e.g. first column of scanone object
 }
   \item{pos}{
-Vector of positions for count, corresponding to \code{chr}, e.g. second
-column of \code{scanone} object
+Vector of positions for count, corresponding to chr, e.g. second
+column of scanone object
 }
   \item{win}{
 Numeric value of window size, count will be number of traits with
 significant maximum LOD score within the window, centered at
-\code{c(chr,pos)}
-}
+c(chr,pos)}
 }
 \details{
 %%  ~~ If necessary, more details than the description above ~~

@@ -10,12 +10,23 @@ on position of maximum LOD score.  Uses output from
 \code{maxlod.cistrans} function, CIS traits are shown in grayscale.
 }
 \usage{
-plotpeaks(pos.peaks, map=NULL,n.col = 256, cbreaks = quantile(pos.peaks$peaks.lod, probs = seq(0, 1, length = n.col + 1)), chr.peaks = levels(factor(pos.peaks$peaks.chr,exclude=NULL)), chr.trait = levels(factor(pos.peaks$trait.chr,exclude=NULL)), xlab = "Chromosome of Peak Score", ylab = "Chromosome of Transcript", col.legend = TRUE, lims.legend = c(-0.08, 0.3), q.legend = c(0.025, 0.25, 0.5, 0.75, 0.975), ...)
+plotpeaks(pos.peaks,
+map=NULL, 
+n.col = 256,
+cbreaks = quantile(pos.peaks$peaks.lod, probs = seq(0, 1, length = n.col
++ 1)),
+chr.peaks = levels(factor(pos.peaks$peaks.chr,exclude=NULL)),
+chr.trait = levels(factor(pos.peaks$trait.chr,exclude=NULL)),
+xlab = "Chromosome of Peak Score",
+ylab = "Chromosome of Transcript",
+col.legend = TRUE,
+lims.legend = c(-0.08, 0.3),
+q.legend = c(0.025, 0.25, 0.5, 0.75, 0.975), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{pos.peaks}{\code{peaks} element from \code{maxlod.cistrans}
-    function. \code{peaks} is a \code{data.frame}}
+    function. \code{peaks} is a data.frame}
   \item{map}{\code{map} object from cross object, used to determine
     chromosome lengths; if not available, estimated from pos.peaks}
   \item{n.col}{Number of colors to use, default is 256}
@@ -26,8 +37,7 @@ plotpeaks(pos.peaks, map=NULL,n.col = 256, cbreaks = quantile(pos.peaks$peaks.lo
     defaults to all chromosomes}
   \item{xlab}{x-axis label}
   \item{ylab}{y-axis label}
-  \item{col.legend}{logical, TRUE to add a color legend to the plot,
-    added along the x-axis}
+  \item{col.legend}{logical, TRUE to add a color legend along the x-axis}
   \item{lims.legend}{numeric vector of the form c(xlim1,xlim2) as a
     proportion of the plotting area, where legend should be placed}
   \item{q.legend}{numeric vector between 0 and 1 indicating LOD categories to
@@ -54,7 +64,8 @@ Brian Yandell and Aimee Teo Broman
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 
 \seealso{
-\code{\link[qtlview]{cistrans}}
+  \code{\link{maxlod.cistrans}}
+  \code{\link[qtlview]{cistrans}} (from qtlview library)
 }
 \examples{
 data(fake.bc)
