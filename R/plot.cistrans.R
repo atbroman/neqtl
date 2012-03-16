@@ -6,35 +6,62 @@
 ## vector of the form c(xlim1,xlim2) as a proportion of 
 ## the plotting area
 
-plot.cistrans <- function(pos.peaks, n.col=256,
+plot.cistrans <- function(pos.peaks, map=NULL, n.col=256,
      cbreaks=quantile(pos.peaks$peaks.lod,probs=seq(0,1,length=n.col+1)),
-     chr.peaks=NULL,chr.trait=chr.peaks,cis.gray=TRUE,
+     chr.peaks=levels(factor(pos.peaks$peaks.chr,exclude=NULL)),
+     chr.trait=levels(factor(pos.peaks$trait.chr,exclude=NULL)),
      xlab="Chromosome of Peak Score",
      ylab="Chromosome of Transcript",
      col.legend=TRUE, lims.legend=c(-0.08,0.3),
-     q.legend=c(0.025,0.25,0.5,0.75,0.975),...){
+     q.legend=c(0.025,0.25,0.5,0.75,0.975), ...){
+
+  ## Checks ##
   if(length(cbreaks) != n.col+1) stop("cbreaks must have length n.col+1")
-  ## Plot subset of Chromosomes ##
-  if(!is.null(chr.peaks))
-     pos.peaks <- pos.peaks[pos.peaks$peaks.chr %in% chr.peaks &
-                  pos.peaks$trait.chr %in% chr.trait &
-                  !is.na(pos.peaks$trait.chr),]
+  for(i in c("peaks","trait")){
+    if(!all(get(paste("chr",i,sep=".")) %in%
+       levels(pos.peaks[[paste(i,"chr",sep=".")]])))
+       stop(paste("chr.",i," not in range",sep=""))
+    if(is.numeric(get(paste("chr",i,sep="."))))
+      assign(paste("chr",i,sep="."),as.character(get(paste("chr",i,sep="."))))
+  }
+
+  ## Chr lengths equal for peak and trait pos ##
+  ## Trait may have chromosomes not in genetic map ##
+  len.pos <- function(axis.name="peaks"){
+    if(is.null(map) | axis.name != "peaks")
+      tapply(pos.peaks[[paste(axis.name,"pos",sep=".")]],
+             pos.peaks[[paste(axis.name,"chr",sep=".")]],
+             function(x) max(x,na.rm=TRUE))
+    else
+      sapply(map,function(x) max(x))
+  } 
+  pklen <- len.pos(axis.name="peaks")
+  prlen <- len.pos(axis.name="trait")
+  len <- apply(cbind(pklen,prlen[names(prlen) %in% names(pklen)]),1,
+         function(x){if(all(is.na(x))) NA else max(x,na.rm=TRUE)})
+
+  ## Subset of Chromosomes ##
+  pos.peaks <- pos.peaks[pos.peaks$peaks.chr %in% chr.peaks &
+                   pos.peaks$trait.chr %in% chr.trait &
+                   !is.na(pos.peaks$trait.chr),]
+  if(nrow(pos.peaks)==0) stop("No peaks in chr.peaks & trait.chr")
+
   ## Allow for different number of chromosomes ##
-  axis.pos <- function(axis.name="peaks"){
-    len <- tapply(pos.peaks[[paste(axis.name,"pos",sep=".")]],
-           pos.peaks[[paste(axis.name,"chr",sep=".")]],
-           function(x) ifelse(length(x)>0,max(x,na.rm=TRUE),0))
-    len[is.na(len)] <- 0
-    cumpos <- c(0,cumsum(len)[-length(len)])
-    pchr <- as.numeric(pos.peaks[[paste(axis.name,"chr",sep=".")]])
-    ppos <- (pos.peaks[[paste(axis.name,"pos",sep=".")]]-len[pchr]/2)*0.9+
-      len[pchr]/2+cumpos[pchr]
-    list(len=len,cumpos=cumpos,chr=pchr,pos=ppos)
+  axis.pos <- function(axis.name="peaks",len){
+    lchr <- get(paste("chr",axis.name,sep="."))
+    llen <- ifelse(len==0,5,len)[lchr]
+    cumpos <- c(0,cumsum(llen))
+    names(cumpos) <- c(names(cumpos)[-1],"max")
+    pchr <- as.character(pos.peaks[[paste(axis.name,"chr",sep=".")]])
+    ppos <- (pos.peaks[[paste(axis.name,"pos",sep=".")]]-
+             llen[pchr]/2)*0.9+llen[pchr]/2+cumpos[pchr]
+    list(len=llen,cumpos=cumpos,chr=pchr,pos=ppos)
   }
   ## Positions for Peaks ##
-  pk <- axis.pos(axis.name="peaks")
+  pk <- axis.pos(axis.name="peaks",len=len)
   ## Positions for Transcript ##
-  pr <- axis.pos(axis.name="trait")
+  pr <- axis.pos(axis.name="trait",
+     len=c(len,prlen[!(names(prlen) %in% names(pklen))]))
 
   ## CIS / Trans colors ##
   cols.trans <- rev(rainbow(n.col, start = 0, end = 2/3))
@@ -42,38 +69,40 @@ plot.cistrans <- function(pos.peaks, n.col=256,
   lods.cat <- cut(pos.peaks$peaks.lod,breaks=cbreaks,
         labels=cbreaks[-length(cbreaks)]+0.5*diff(cbreaks),
         include.lowest=TRUE)
-  lods.ord <- order(pos.peaks$peaks.lod)
+  lods.ord <- order(pos.peaks$cis,pos.peaks$peaks.lod)
 
   ## Plot ##
   par(xpd=TRUE)
-  plot(pk$pos,pr$pos,xaxt="n",mgp=c(1.5,0.5,0),
+  plot(pk$cumpos[c(1,length(pk$cumpos))],
+       pr$cumpos[c(1,length(pr$cumpos))],
+       xaxt="n",mgp=c(1.5,0.5,0),
        xlab="",ylab="",type="n",xaxs="i",yaxs="i",yaxt="n",...)
   mtext(xlab,side=1,line=1.4)
   mtext(ylab,side=2,line=1.4)
   a <- par("usr")
-  segments(c(pk$cumpos[pk$len>0][-1],
-             rep(a[1],length(pr$len[pr$len>0])-1)),
-           c(rep(a[3],length(pk$len[pk$len>0])-1),
-             pr$cumpos[pr$len>0][-1]),
-           c(pk$cumpos[pk$len>0][-1],
-             rep(a[2],length(pr$len[pr$len>0])-1)),
-           c(rep(a[4],length(pk$len[pk$len>0])-1),
-             pr$cumpos[pr$len>0][-1]),
+  segments(c(pk$cumpos[-c(1,length(pk$cumpos))],
+             rep(a[1],length(pr$len)-1)),
+           c(rep(a[3],length(pk$len)-1),
+             pr$cumpos[-c(1,length(pr$cumpos))]),
+           c(pk$cumpos[-c(1,length(pk$cumpos))],
+             rep(a[2],length(pr$len)-1)),
+           c(rep(a[4],length(pk$len)-1),
+             pr$cumpos[-c(1,length(pr$cumpos))]),
            col="lightgray")
-  segments(c(pk$len[pk$len>0]/2+pk$cumpos[pk$len>0],
-             rep(a[1],length(pr$len[pr$len>0]))),
-           c(rep(a[3],length(pk$len[pk$len>0])),
-             pr$len[pr$len>0]/2+pr$cumpos[pr$len>0]),
-           c(pk$len[pk$len>0]/2+pk$cumpos[pk$len>0],
-             rep(a[1]-0.005*(a[2]-a[1]),length(pr$len[pr$len>0]))),
-           c(rep(a[3]-0.01*(a[4]-a[3]),length(pk$len[pk$len>0])),
-             pr$len[pr$len>0]/2+pr$cumpos[pr$len>0]))
-  mtext(names(pk$len)[pk$len>0],at=(pk$len[pk$len>0]/2+pk$cumpos[pk$len>0]),
+  segments(c(pk$len/2+pk$cumpos[-length(pk$cumpos)],
+             rep(a[1],length(pr$len))),
+           c(rep(a[3],length(pk$len)),
+             pr$len/2+pr$cumpos[-length(pr$cumpos)]),
+           c(pk$len/2+pk$cumpos[-length(pk$cumpos)],
+             rep(a[1]-0.005*(a[2]-a[1]),length(pr$len))),
+           c(rep(a[3]-0.01*(a[4]-a[3]),length(pk$len)),
+             pr$len/2+pr$cumpos[-length(pr$cumpos)]))
+  mtext(names(pk$len),at=(pk$len/2+pk$cumpos[-length(pk$cumpos)]),
         line=0.3,side=1)
-  mtext(names(pr$len)[pr$len>0],at=(pr$len[pr$len>0]/2+pr$cumpos[pr$len>0]),
+  mtext(names(pr$len),at=(pr$len/2+pr$cumpos[-length(pr$cumpos)]),
         line=0.3,side=2,las=2)
   points(pk$pos[lods.ord],pr$pos[lods.ord],
-         col=ifelse(pos.peaks$cis[lods.ord]==1 & cis.gray==TRUE,
+         col=ifelse(pos.peaks$cis[lods.ord]==1,
            cols.cis[as.numeric(lods.cat)][lods.ord],
            cols.trans[as.numeric(lods.cat)][lods.ord]),
          pch=19,cex=0.5, ...)
@@ -86,7 +115,6 @@ plot.cistrans <- function(pos.peaks, n.col=256,
     rect(b[1]+((1:n.col)-1)/n.col*(b[2]-b[1]), b[3],
          b[1]+(1:n.col)/n.col*(b[2]-b[1]), b[4],
          col=cols.trans,density=NA)
-    if(cis.gray==TRUE)
     rect(b[1]+((1:n.col)-1)/n.col*(b[2]-b[1]),b[4],
          b[1]+(1:n.col)/n.col*(b[2]-b[1]),b[4]+(b[4]-b[3]),
          col=cols.cis,density=NA)
@@ -101,4 +129,3 @@ plot.cistrans <- function(pos.peaks, n.col=256,
          c("LOD",qi),cex=0.7,adj=c(0.5,0))
    }
 }
-

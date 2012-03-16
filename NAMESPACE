@@ -7,6 +7,7 @@ export(neqtl)
 export(findmax)
 export(findmax.traits)
 export(maxlod.cistrans)
+export(plot.cistrans)
 
 # functions to import
 importFrom(stats, rnorm)

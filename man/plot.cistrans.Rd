@@ -7,23 +7,23 @@ Plot position of trait vs. position of QTL
 \description{
 Plots trait position, based on annotation against position of QTL, based
 on position of maximum LOD score.  Uses output from
-\code{maxlod.cistrans} function.
+\code{maxlod.cistrans} function, CIS traits are shown in grayscale.
 }
 \usage{
-plot.cistrans(pos.peaks, n.col = 256, cbreaks = quantile(pos.peaks$peaks.lod, probs = seq(0, 1, length = n.col + 1)), chr.peaks = NULL, chr.trait = chr.peaks, cis.gray = TRUE, xlab = "Chromosome of Peak Score", ylab = "Chromosome of Transcript", col.legend = TRUE, lims.legend = c(-0.08, 0.3), q.legend = c(0.025, 0.25, 0.5, 0.75, 0.975), ...)
+plot.cistrans(pos.peaks, map=NULL,n.col = 256, cbreaks = quantile(pos.peaks$peaks.lod, probs = seq(0, 1, length = n.col + 1)), chr.peaks = levels(factor(pos.peaks$peaks.chr,exclude=NULL)), chr.trait = levels(factor(pos.peaks$trait.chr,exclude=NULL)), xlab = "Chromosome of Peak Score", ylab = "Chromosome of Transcript", col.legend = TRUE, lims.legend = c(-0.08, 0.3), q.legend = c(0.025, 0.25, 0.5, 0.75, 0.975), ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{pos.peaks}{\code{peaks} element from \code{maxlod.cistrans}
     function. \code{peaks} is a \code{data.frame}}
+  \item{map}{\code{map} object from cross object, used to determine
+    chromosome lengths; if not available, estimated from pos.peaks}
   \item{n.col}{Number of colors to use, default is 256}
   \item{cbreaks}{Breaks to categorize LOD score, length(cbreaks) = n.col+1}
-  \item{chr.peaks}{Vector of chromosomes to plot for peak positions,
+  \item{chr.peaks}{Character vector of subset of peak chromosomes,
     defaults to all chromosomes} 
-  \item{chr.trait}{Vector of chromosomes to plot for trait positions,
+  \item{chr.trait}{Character vector of trait chromosomes,
     defaults to all chromosomes}
-  \item{cis.gray}{logical, TRUE if plotting CIS traits on a grayscale,
-    otherwise FALSE}
   \item{xlab}{x-axis label}
   \item{ylab}{y-axis label}
   \item{col.legend}{logical, TRUE to add a color legend to the plot,
@@ -61,7 +61,8 @@ data(fake.bc)
 fake.bc <- calc.genoprob(fake.bc, step=2.5)
 
 ## Fake annotation ##
-annot.bc <- data.frame(chr=factor(c("5","1"),levels=names(fake.bc$geno)),pos=c(20,10))
+annot.bc <- data.frame(chr=factor(c("5","1"),
+            levels=names(fake.bc$geno)),pos=c(20,10))
 row.names(annot.bc) <- c("pheno1","pheno2")
 
 scanone.bc <- scanone(fake.bc,pheno.col=1:2)
@@ -70,7 +71,12 @@ sig.bc <- maxlod.sigpos(maxlod.bc,sig.lod=3)
 
 peaks.bc <- maxlod.cistrans(maxlod.bc,sig.bc,annot.bc)
 
-## Works better if multiple positions available per chromosome ##
 plot.cistrans(peaks.bc$peaks)
+
+## Using qtlview ##
+#peaks <-peaks.bc$peaks
+#names(peaks)[c(2:4,7)] <- c("peak.chr","peak.pos.cM","peak.score","trait.pos.cM")
+#plot(cistrans(peaks,cross.name="fake.bc",
+#   maps=list(Mb.map=pull.map(fake.bc),cM.map=pull.map(fake.bc))))
 
 }

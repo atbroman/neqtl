@@ -72,7 +72,7 @@ Karl W. Broman and Aimee Teo Broman
 %}
 
 \seealso{
-\code{\link[qtlview]{cistrans}}
+  \code{\link{plot.cistrans}}
 }
 \examples{
 data(fake.bc)
@@ -88,14 +88,4 @@ sig.bc <- maxlod.sigpos(maxlod.bc,sig.lod=3)
 
 peaks.bc <- maxlod.cistrans(maxlod.bc,sig.bc,annot.bc)
 
-## To plot this in library(qtlview) ##
-library(qtlview)
-peaks.view <- peaks.bc$peaks
-
-names(peaks.view) <- c("id","peak.chr","peak.pos.cM","peak.score",
-                       "cis","trait.chr","trait.pos.cM")
-## cM map--if Mb map is available, use this in map list parameter ##
-gmap <- pull.map(fake.bc)
-plot(cistrans(peaks.view,cross.name="fake.bc",use.cM=TRUE,peak.chr=1:6,
-trait.chr=1:6,map=list(Mb.map=gmap,cM.map=gmap)),show.cumscore=FALSE,pch=16,cex=2)
 }

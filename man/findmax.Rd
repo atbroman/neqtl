@@ -32,16 +32,12 @@ maximum values)
 }
 }
 
-\value{
-%%  ~Describe the value returned
-%%  If it is a LIST, use
-%%  \item{comp1 }{Description of 'comp1'}
-%%  \item{comp2 }{Description of 'comp2'}
-%% ...
-}
-\references{
+\value{data.frame of chr and pos of peak positions}
+
+%%\references{
 %% ~put references to the literature/web site here ~
-}
+%%}
+
 \author{
 Karl W. Broman and Aimee Teo Broman
 }
