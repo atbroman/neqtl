@@ -30,23 +30,23 @@ Numeric value of window size, count will be number of traits with
 significant maximum LOD score within the window, centered at
 c(chr,pos)}
 }
-\details{
+%\details{
 %%  ~~ If necessary, more details than the description above ~~
-}
+%}
 \value{
 \code{scanone} object with \code{cbind(chr,pos)} as the first two
 columns, and number of transcripts with significant maximum LOD score in
 the pheno column
 }
-\references{
+%%\references{
 %% ~put references to the literature/web site here ~
-}
+%%}
 \author{
 Karl W. Broman and Aimee Teo Broman
 }
-\note{
+%%\note{
 %%  ~~further notes~~
-}
+%%}
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
 

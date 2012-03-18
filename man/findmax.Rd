@@ -41,13 +41,12 @@ maximum values)
 \author{
 Karl W. Broman and Aimee Teo Broman
 }
-\note{
+%%\note{
 
-}
+%%}
 
-\seealso{
-%% ~~objects to See Also as \code{\link{help}}, ~~~
-}
+%%\seealso{
+%%}
 \examples{
 data(multitrait)
 multitrait <- calc.genoprob(multitrait, step=2)

@@ -24,6 +24,10 @@ plotpeaks <- function(pos.peaks, map=NULL, n.col=256,
     if(is.numeric(get(paste("chr",i,sep="."))))
       assign(paste("chr",i,sep="."),as.character(get(paste("chr",i,sep="."))))
   }
+  if(any(is.na(pos.peaks$trait.pos))){
+    warning("Setting trait.pos==NA to trait.pos=0; position in alternate units may be used for plotting purposes")
+    pos.peaks$trait.pos[is.na(pos.peaks$trait.pos)] <- 0
+  }
 
   ## Chr lengths equal for peak and trait pos ##
   ## Trait may have chromosomes not in genetic map ##

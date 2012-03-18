@@ -26,11 +26,12 @@ q.legend = c(0.025, 0.25, 0.5, 0.75, 0.975), ...)
 %- maybe also 'usage' for other objects documented here.
 \arguments{
   \item{pos.peaks}{\code{peaks} element from \code{peaks}
-    function. \code{peaks} is a data.frame}
+    function. \code{peaks} is a data.frame.  See Details}
   \item{map}{\code{map} object from cross object, used to determine
     chromosome lengths; if not available, estimated from pos.peaks}
   \item{n.col}{Number of colors to use, default is 256}
-  \item{cbreaks}{Breaks to categorize LOD score, length(cbreaks) = n.col+1}
+  \item{cbreaks}{Breaks to categorize LOD score, length(cbreaks) =
+    n.col+1, see Details}
   \item{chr.peaks}{Character vector of subset of peak chromosomes,
     defaults to all chromosomes} 
   \item{chr.trait}{Character vector of trait chromosomes,
@@ -45,10 +46,14 @@ q.legend = c(0.025, 0.25, 0.5, 0.75, 0.975), ...)
   \item{\dots}{additional paramters for \code{plot} and \code{points}}
 }
 \details{
+  For plotting purposes, the pos.peaks should have non-missing trait.pos
+  for all traits; occasionally, traits will reside on chromosomes that
+  are not part of the marker set, and will have unknown cM positions.
+  In this case, Mb positions may be substituted to show trans
+  relationships.
+    
   The default color categories are divided by equally spaced
-  quantiles of the peak LOD scores for maximum color range. If
-  cis.gray=FALSE CIS traits are plotted with the same color as the trans
-  traits. 
+  quantiles of the peak LOD scores for maximum color range.
 }
 \value{Outputs a plot}
 %%\references{
