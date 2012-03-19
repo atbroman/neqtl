@@ -10,19 +10,28 @@ plotpeaks <- function(pos.peaks, map=NULL, n.col=256,
      cbreaks=quantile(pos.peaks$peaks.lod,probs=seq(0,1,length=n.col+1)),
      chr.peaks=levels(factor(pos.peaks$peaks.chr,exclude=NULL)),
      chr.trait=levels(factor(pos.peaks$trait.chr,exclude=NULL)),
+     clab.peaks=chr.peaks,clab.trait=chr.trait,
      xlab="Chromosome of Peak Score",
      ylab="Chromosome of Transcript",
      col.legend=TRUE, lims.legend=c(-0.08,0.3),
-     q.legend=c(0.025,0.25,0.5,0.75,0.975), ...){
+     q.legend=c(0.025,0.25,0.5,0.75,0.975),
+     ...){
 
   ## Checks ##
   if(length(cbreaks) != n.col+1) stop("cbreaks must have length n.col+1")
   for(i in c("peaks","trait")){
     if(!all(get(paste("chr",i,sep=".")) %in%
-       levels(pos.peaks[[paste(i,"chr",sep=".")]])))
-       stop(paste("chr.",i," not in range",sep=""))
+       levels(pos.peaks[[paste(i,"chr",sep=".")]]))){
+       warning(paste("chr.",i," not in range",sep=""))
+       assign(paste("chr",i,sep="."),
+       get(paste("chr",i,sep="."))[
+          !is.na(match(levels(pos.peaks[[paste(i,"chr",sep=".")]]),
+                get(paste("chr",i,sep="."))))])
+     }
     if(is.numeric(get(paste("chr",i,sep="."))))
       assign(paste("chr",i,sep="."),as.character(get(paste("chr",i,sep="."))))
+    if(any(is.na(match(get(paste("clab",i,sep=".")),get(paste("chr",i,sep="."))))))
+      stop(paste("clab.",i," must be a subset of chr.",i,sep=""))
   }
   if(any(is.na(pos.peaks$trait.pos))){
     warning("Setting trait.pos==NA to trait.pos=0; position in alternate units may be used for plotting purposes")
@@ -76,42 +85,30 @@ plotpeaks <- function(pos.peaks, map=NULL, n.col=256,
   lods.ord <- order(pos.peaks$cis,pos.peaks$peaks.lod)
 
   ## Plot ##
-  par(xpd=TRUE)
+  par(xpd=TRUE,mgp=c(1.2,0.5,0),las=1)
   plot(pk$cumpos[c(1,length(pk$cumpos))],
        pr$cumpos[c(1,length(pr$cumpos))],
-       xaxt="n",mgp=c(1.5,0.5,0),
-       xlab="",ylab="",type="n",xaxs="i",yaxs="i",yaxt="n",...)
-  mtext(xlab,side=1,line=1.4)
-  mtext(ylab,side=2,line=1.4)
-  a <- par("usr")
-  segments(c(pk$cumpos[-c(1,length(pk$cumpos))],
-             rep(a[1],length(pr$len)-1)),
-           c(rep(a[3],length(pk$len)-1),
-             pr$cumpos[-c(1,length(pr$cumpos))]),
-           c(pk$cumpos[-c(1,length(pk$cumpos))],
-             rep(a[2],length(pr$len)-1)),
-           c(rep(a[4],length(pk$len)-1),
-             pr$cumpos[-c(1,length(pr$cumpos))]),
-           col="lightgray")
-  segments(c(pk$len/2+pk$cumpos[-length(pk$cumpos)],
-             rep(a[1],length(pr$len))),
-           c(rep(a[3],length(pk$len)),
-             pr$len/2+pr$cumpos[-length(pr$cumpos)]),
-           c(pk$len/2+pk$cumpos[-length(pk$cumpos)],
-             rep(a[1]-0.005*(a[2]-a[1]),length(pr$len))),
-           c(rep(a[3]-0.01*(a[4]-a[3]),length(pk$len)),
-             pr$len/2+pr$cumpos[-length(pr$cumpos)]))
-  mtext(names(pk$len),at=(pk$len/2+pk$cumpos[-length(pk$cumpos)]),
-        line=0.3,side=1)
-  mtext(names(pr$len),at=(pr$len/2+pr$cumpos[-length(pr$cumpos)]),
-        line=0.3,side=2,las=2)
+       xlab=xlab,ylab=ylab,
+       xaxt="n",type="n",xaxs="i",yaxs="i",yaxt="n",
+       ...)
+  ## Grid lines ##
+  axis(side=1,at=pk$cumpos[-c(1,length(pk$cumpos))],
+       labels=FALSE,tck=1,col.ticks="lightgray")
+  axis(side=2,at=pr$cumpos[-c(1,length(pr$cumpos))],
+       labels=FALSE,tck=1,col.ticks="lightgray")
+  ## Axis Labels ##
+  axis(side=1,at=(pk$len/2+pk$cumpos[-length(pk$cumpos)]),
+       labels=clab.peaks[match(names(pk$len),clab.peaks)], ...)
+  axis(side=2,at=(pr$len/2+pr$cumpos[-length(pr$cumpos)]),
+       labels=clab.trait[match(names(pr$len),clab.trait)], ...)
   points(pk$pos[lods.ord],pr$pos[lods.ord],
          col=ifelse(pos.peaks$cis[lods.ord]==1,
            cols.cis[as.numeric(lods.cat)][lods.ord],
            cols.trans[as.numeric(lods.cat)][lods.ord]),
-         pch=19,cex=0.5, ...)
+           ...)
   if(col.legend==TRUE){
   ## lims is expressed as a fraction of the side ##
+    a <- par("usr")
     lims <- c(lims.legend,-0.12,-0.14)
     dx <- a[2]-a[1]
     dy <- a[4]-a[3]
@@ -130,6 +127,9 @@ plotpeaks <- function(pos.peaks, map=NULL, n.col=256,
     qi <- round(quantile(as.numeric(levels(lods.cat)),probs=q.legend),2)
     text(b[1]+c(q.legend[1],q.legend)*(b[2]-b[1]),
          b[3]-c(1.5,rep(0.5,length(q.legend)))*(b[4]-b[3]),
-         c("LOD",qi),cex=0.7,adj=c(0.5,0))
+         c("LOD",qi),adj=c(0.5,0),
+         cex=ifelse(!is.na(match("cex",names(list(...)))),
+           list(...)$cex,1)*0.7)
    }
 }
+

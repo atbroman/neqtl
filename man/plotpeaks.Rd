@@ -13,10 +13,12 @@ on position of maximum LOD score.  Uses output from
 plotpeaks(pos.peaks,
 map=NULL, 
 n.col = 256,
-cbreaks = quantile(pos.peaks$peaks.lod, probs = seq(0, 1, length = n.col
-+ 1)),
+cbreaks = quantile(pos.peaks$peaks.lod,
+          probs = seq(0, 1, length = n.col+ 1)),
 chr.peaks = levels(factor(pos.peaks$peaks.chr,exclude=NULL)),
 chr.trait = levels(factor(pos.peaks$trait.chr,exclude=NULL)),
+clab.peaks = chr.peaks,
+clab.trait = chr.trait,
 xlab = "Chromosome of Peak Score",
 ylab = "Chromosome of Transcript",
 col.legend = TRUE,
@@ -36,6 +38,10 @@ q.legend = c(0.025, 0.25, 0.5, 0.75, 0.975), ...)
     defaults to all chromosomes} 
   \item{chr.trait}{Character vector of trait chromosomes,
     defaults to all chromosomes}
+  \item{clab.peaks}{Character vector for x-axis labels, must be a
+    subset of chr.peaks}
+  \item{clab.trait}{Character vector for y-axis labels, must be a subset
+    of chr.trait}
   \item{xlab}{x-axis label}
   \item{ylab}{y-axis label}
   \item{col.legend}{logical, TRUE to add a color legend along the x-axis}
@@ -43,7 +49,7 @@ q.legend = c(0.025, 0.25, 0.5, 0.75, 0.975), ...)
     proportion of the plotting area, where legend should be placed}
   \item{q.legend}{numeric vector between 0 and 1 indicating LOD categories to
     label in the color legend}
-  \item{\dots}{additional paramters for \code{plot} and \code{points}}
+  \item{\dots}{additional paramters for \code{points} and \code{text}}
 }
 \details{
   For plotting purposes, the pos.peaks should have non-missing trait.pos

@@ -47,7 +47,8 @@ peaks <- function(maxlod.out,sigpos.out,
          unlist(lapply(mxpos,length))),levels=names(mxpos)),
        do.call(rbind,mapply(function(pos,lod)
                cbind(peaks.pos=pos,peaks.lod=lod),mxpos,mxlod)),
-       row.names=NULL)
+       row.names=NULL,stringsAsFactors=FALSE)
+  
   peaks <- rbind(cbind(maxpos.unlist(mxpos.cis,mxlod.cis),cis=1),
                     cbind(maxpos.unlist(mxpos.trans,mxlod.trans),cis=0))
   peaks[,paste("trait",c("chr","pos"),sep=".")] <-
