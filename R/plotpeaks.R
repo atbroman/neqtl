@@ -13,7 +13,7 @@ plotpeaks <- function(pos.peaks, map=NULL, n.col=256,
      clab.peaks=chr.peaks,clab.trait=chr.trait,
      xlab="Chromosome of Peak Score",
      ylab="Chromosome of Transcript",
-     col.legend=TRUE, lims.legend=c(-0.08,0.3),
+     col.legend=TRUE, lims.legend=c(-0.08,0.3,-0.12,-0.14),
      q.legend=c(0.025,0.25,0.5,0.75,0.975),
      ...){
 
@@ -85,7 +85,7 @@ plotpeaks <- function(pos.peaks, map=NULL, n.col=256,
   lods.ord <- order(pos.peaks$cis,pos.peaks$peaks.lod)
 
   ## Plot ##
-  par(xpd=TRUE,mgp=c(1.2,0.5,0),las=1)
+  par(xpd=TRUE) ## for legend 
   plot(pk$cumpos[c(1,length(pk$cumpos))],
        pr$cumpos[c(1,length(pr$cumpos))],
        xlab=xlab,ylab=ylab,
@@ -107,12 +107,11 @@ plotpeaks <- function(pos.peaks, map=NULL, n.col=256,
            cols.trans[as.numeric(lods.cat)][lods.ord]),
            ...)
   if(col.legend==TRUE){
-  ## lims is expressed as a fraction of the side ##
+  ## lims.legend is expressed as a fraction of plot region ##
     a <- par("usr")
-    lims <- c(lims.legend,-0.12,-0.14)
     dx <- a[2]-a[1]
     dy <- a[4]-a[3]
-    b <- c(a[1]+lims[1:2]*dx,a[3]+lims[3:4]*dy)
+    b <- c(a[1]+lims.legend[1:2]*dx,a[3]+lims.legend[3:4]*dy)
     rect(b[1]+((1:n.col)-1)/n.col*(b[2]-b[1]), b[3],
          b[1]+(1:n.col)/n.col*(b[2]-b[1]), b[4],
          col=cols.trans,density=NA)
@@ -129,7 +128,7 @@ plotpeaks <- function(pos.peaks, map=NULL, n.col=256,
          b[3]-c(1.5,rep(0.5,length(q.legend)))*(b[4]-b[3]),
          c("LOD",qi),adj=c(0.5,0),
          cex=ifelse(!is.na(match("cex",names(list(...)))),
-           list(...)$cex,1)*0.7)
+           list(...)$cex,1)*0.8)
    }
 }
 

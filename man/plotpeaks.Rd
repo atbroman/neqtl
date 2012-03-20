@@ -22,7 +22,7 @@ clab.trait = chr.trait,
 xlab = "Chromosome of Peak Score",
 ylab = "Chromosome of Transcript",
 col.legend = TRUE,
-lims.legend = c(-0.08, 0.3),
+lims.legend = c(-0.08, 0.3, -0.12, -0.14),
 q.legend = c(0.025, 0.25, 0.5, 0.75, 0.975), ...)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -45,8 +45,8 @@ q.legend = c(0.025, 0.25, 0.5, 0.75, 0.975), ...)
   \item{xlab}{x-axis label}
   \item{ylab}{y-axis label}
   \item{col.legend}{logical, TRUE to add a color legend along the x-axis}
-  \item{lims.legend}{numeric vector of the form c(xlim1,xlim2) as a
-    proportion of the plotting area, where legend should be placed}
+  \item{lims.legend}{numeric vector of the form c(x0,xl,y0,y1) as a
+    fraction of the plotting area, where legend should be placed}
   \item{q.legend}{numeric vector between 0 and 1 indicating LOD categories to
     label in the color legend}
   \item{\dots}{additional paramters for \code{points} and \code{text}}
