@@ -22,9 +22,9 @@ clab.trait = chr.trait,
 xlab = "Chromosome of Peak Score",
 ylab = "Chromosome of Transcript",
 col.legend = TRUE,
-lims.legend = c(-0.08, 0.3, -0.12, -0.14),
-q.legend = c(0.025, 0.25, 0.5, 0.75, 0.975),
-cex.legend = 0.8,
+llims = c(-0.08, 0.3, -0.12, -0.14),
+lticks = c(0.025, 0.25, 0.5, 0.75, 0.975),
+lcex = 0.8,
  ...)
 }
 %- maybe also 'usage' for other objects documented here.
@@ -47,11 +47,11 @@ cex.legend = 0.8,
   \item{xlab}{x-axis label}
   \item{ylab}{y-axis label}
   \item{col.legend}{logical, TRUE to add a color legend along the x-axis}
-  \item{lims.legend}{numeric vector of the form c(x0,xl,y0,y1) as a
+  \item{llims}{numeric vector of the form c(x0,xl,y0,y1) as a
     fraction of the plotting area, where legend should be placed}
-  \item{q.legend}{numeric vector between 0 and 1 indicating LOD categories to
-    label in the color legend}
-  \item{cex.legend}{magnification of legend text size relative to the
+  \item{lticks}{numeric vector between 0 and 1 indicating quantiles of
+    LOD categories to label in the legend}
+  \item{lcex}{magnification of legend text size relative to the
     currrent setting of cex}
   \item{\dots}{additional paramters for \code{points} and \code{text}}
 }

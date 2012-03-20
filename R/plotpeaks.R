@@ -13,9 +13,10 @@ plotpeaks <- function(pos.peaks, map=NULL, n.col=256,
      clab.peaks=chr.peaks,clab.trait=chr.trait,
      xlab="Chromosome of Peak Score",
      ylab="Chromosome of Transcript",
-     col.legend=TRUE, lims.legend=c(-0.08,0.3,-0.12,-0.14),
-     q.legend=c(0.025,0.25,0.5,0.75,0.975),
-     cex.legend=0.8,
+     col.legend=TRUE,
+     llims=c(-0.08,0.3,-0.12,-0.14),
+     lticks=c(0.025,0.25,0.5,0.75,0.975),
+     lcex=0.8,
      ...){
 
   ## Checks ##
@@ -86,7 +87,7 @@ plotpeaks <- function(pos.peaks, map=NULL, n.col=256,
   lods.ord <- order(pos.peaks$cis,pos.peaks$peaks.lod)
 
   ## Plot ##
-  par(xpd=TRUE) ## for legend 
+  par(xpd=TRUE) ## for legend
   plot(pk$cumpos[c(1,length(pk$cumpos))],
        pr$cumpos[c(1,length(pr$cumpos))],
        xlab=xlab,ylab=ylab,
@@ -108,11 +109,11 @@ plotpeaks <- function(pos.peaks, map=NULL, n.col=256,
            cols.trans[as.numeric(lods.cat)][lods.ord]),
            ...)
   if(col.legend==TRUE){
-  ## lims.legend is expressed as a fraction of plot region ##
+  ## llims is expressed as a fraction of plot region ##
     a <- par("usr")
     dx <- a[2]-a[1]
     dy <- a[4]-a[3]
-    b <- c(a[1]+lims.legend[1:2]*dx,a[3]+lims.legend[3:4]*dy)
+    b <- c(a[1]+llims[1:2]*dx,a[3]+llims[3:4]*dy)
     rect(b[1]+((1:n.col)-1)/n.col*(b[2]-b[1]), b[3],
          b[1]+(1:n.col)/n.col*(b[2]-b[1]), b[4],
          col=cols.trans,density=NA)
@@ -120,15 +121,15 @@ plotpeaks <- function(pos.peaks, map=NULL, n.col=256,
          b[1]+(1:n.col)/n.col*(b[2]-b[1]),b[4]+(b[4]-b[3]),
          col=cols.cis,density=NA)
     segments(b[1],b[3],b[2],b[3])
-    segments(b[1]+q.legend*(b[2]-b[1]),
-             rep(b[3],length(q.legend)),
-             b[1]+q.legend*(b[2]-b[1]),
-             rep(b[3]-0.5*(b[4]-b[3]),length(q.legend)))
-    qi <- round(quantile(as.numeric(levels(lods.cat)),probs=q.legend),2)
-    text(b[1]+c(q.legend[1],q.legend)*(b[2]-b[1]),
-         b[3]-c(1.5,rep(0.5,length(q.legend)))*(b[4]-b[3]),
+    segments(b[1]+lticks*(b[2]-b[1]),
+             rep(b[3],length(lticks)),
+             b[1]+lticks*(b[2]-b[1]),
+             rep(b[3]-0.5*(b[4]-b[3]),length(lticks)))
+    qi <- round(quantile(as.numeric(levels(lods.cat)),probs=lticks),2)
+    text(b[1]+c(lticks[1],lticks)*(b[2]-b[1]),
+         b[3]-c(1.5,rep(0.5,length(lticks)))*(b[4]-b[3]),
          c("LOD",qi),adj=c(0.5,0),
-         cex=cex.legend*par("cex"))
+         cex=lcex)
    }
 }
 
