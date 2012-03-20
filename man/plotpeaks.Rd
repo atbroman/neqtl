@@ -23,7 +23,9 @@ xlab = "Chromosome of Peak Score",
 ylab = "Chromosome of Transcript",
 col.legend = TRUE,
 lims.legend = c(-0.08, 0.3, -0.12, -0.14),
-q.legend = c(0.025, 0.25, 0.5, 0.75, 0.975), ...)
+q.legend = c(0.025, 0.25, 0.5, 0.75, 0.975),
+cex.legend = 0.8,
+ ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -49,6 +51,8 @@ q.legend = c(0.025, 0.25, 0.5, 0.75, 0.975), ...)
     fraction of the plotting area, where legend should be placed}
   \item{q.legend}{numeric vector between 0 and 1 indicating LOD categories to
     label in the color legend}
+  \item{cex.legend}{magnification of legend text size relative to the
+    currrent setting of cex}
   \item{\dots}{additional paramters for \code{points} and \code{text}}
 }
 \details{

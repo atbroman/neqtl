@@ -15,6 +15,7 @@ plotpeaks <- function(pos.peaks, map=NULL, n.col=256,
      ylab="Chromosome of Transcript",
      col.legend=TRUE, lims.legend=c(-0.08,0.3,-0.12,-0.14),
      q.legend=c(0.025,0.25,0.5,0.75,0.975),
+     cex.legend=0.8,
      ...){
 
   ## Checks ##
@@ -127,8 +128,7 @@ plotpeaks <- function(pos.peaks, map=NULL, n.col=256,
     text(b[1]+c(q.legend[1],q.legend)*(b[2]-b[1]),
          b[3]-c(1.5,rep(0.5,length(q.legend)))*(b[4]-b[3]),
          c("LOD",qi),adj=c(0.5,0),
-         cex=ifelse(!is.na(match("cex",names(list(...)))),
-           list(...)$cex,1)*0.8)
+         cex=cex.legend*par("cex"))
    }
 }
 
