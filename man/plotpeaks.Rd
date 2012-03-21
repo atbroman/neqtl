@@ -46,7 +46,8 @@ lcex = 0.8,
     of chr.trait}
   \item{xlab}{x-axis label}
   \item{ylab}{y-axis label}
-  \item{col.legend}{logical, TRUE to add a color legend along the x-axis}
+  \item{col.legend}{logical, TRUE to add a color legend along the
+    x-axis; colors correspond to LOD scores}
   \item{llims}{numeric vector of the form c(x0,xl,y0,y1) as a
     fraction of the plotting area, where legend should be placed}
   \item{lticks}{numeric vector between 0 and 1 indicating quantiles of

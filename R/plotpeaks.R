@@ -114,22 +114,39 @@ plotpeaks <- function(pos.peaks, map=NULL, n.col=256,
     dx <- a[2]-a[1]
     dy <- a[4]-a[3]
     b <- c(a[1]+llims[1:2]*dx,a[3]+llims[3:4]*dy)
-    rect(b[1]+((1:n.col)-1)/n.col*(b[2]-b[1]), b[3],
+    qi <- round(quantile(as.numeric(levels(lods.cat)),probs=lticks),2)
+    if(abs(diff(llims[1:2])) >= abs(diff(llims[3:4]))){
+      rect(b[1]+((1:n.col)-1)/n.col*(b[2]-b[1]), b[3],
          b[1]+(1:n.col)/n.col*(b[2]-b[1]), b[4],
          col=cols.trans,density=NA)
-    rect(b[1]+((1:n.col)-1)/n.col*(b[2]-b[1]),b[4],
+      rect(b[1]+((1:n.col)-1)/n.col*(b[2]-b[1]),b[4],
          b[1]+(1:n.col)/n.col*(b[2]-b[1]),b[4]+(b[4]-b[3]),
          col=cols.cis,density=NA)
-    segments(b[1],b[3],b[2],b[3])
-    segments(b[1]+lticks*(b[2]-b[1]),
+      segments(b[1],b[3],b[2],b[3])
+      segments(b[1]+lticks*(b[2]-b[1]),
              rep(b[3],length(lticks)),
              b[1]+lticks*(b[2]-b[1]),
              rep(b[3]-0.5*(b[4]-b[3]),length(lticks)))
-    qi <- round(quantile(as.numeric(levels(lods.cat)),probs=lticks),2)
-    text(b[1]+c(lticks[1],lticks)*(b[2]-b[1]),
-         b[3]-c(1.5,rep(0.5,length(lticks)))*(b[4]-b[3]),
-         c("LOD",qi),adj=c(0.5,0),
+      text(b[1]+c(lticks[1],lticks)*(b[2]-b[1]),
+         b[3]-rep(0.5,length(lticks))*(b[4]-b[3]),
+         qi,adj=c(0.5,ifelse(diff(b[3:4])<0,0,1)),
          cex=lcex)
+    } else {
+      rect(b[1],b[3]+((1:n.col)-1)/n.col*(b[4]-b[3]),
+           b[2],b[3]+(1:n.col)/n.col*(b[4]-b[3]),
+         col=cols.trans,density=NA)
+      rect(b[2],b[3]+((1:n.col)-1)/n.col*(b[4]-b[3]),
+         b[2]+(b[2]-b[1]),b[3]+(1:n.col)/n.col*(b[4]-b[3]),
+         col=cols.cis,density=NA)
+      segments(b[1],b[3],b[1],b[4])
+      segments(rep(b[1],length(lticks)),
+               b[3]+lticks*(b[4]-b[3]),
+             rep(b[1]-0.5*(b[2]-b[1]),length(lticks)),
+             b[3]+lticks*(b[4]-b[3]))
+      text(b[1]-rep(0.5,(length(lticks)+1))*(b[2]-b[1]),
+           b[3]+lticks*(b[4]-b[3]),
+         qi,adj=c(ifelse(diff(b[1:2])>0,1,0),0.5),cex=lcex)
+    }
    }
 }
 
