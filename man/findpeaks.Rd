@@ -1,5 +1,5 @@
-\name{findmax}
-\alias{findmax}
+\name{findpeaks}
+\alias{findpeaks}
 
 \title{
 Locates positions of high numbers of eQTL
@@ -7,10 +7,10 @@ Locates positions of high numbers of eQTL
 \description{
 Given output from \code{neqtl}, finds positions for maximum numbers of
 eQTL.  Will find next highest maximum outside of \code{window} from
-peak, for \code{n.max} number of maximums
+peak, for \code{n.peaks} number of maximums
 }
 \usage{
-findmax(neqtl.out, lodcolumn = 1, window = 5, n.max = 10)
+findpeaks(neqtl.out, lodcolumn = 1, window = 5, n.peaks = 10)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -26,8 +26,8 @@ Numeric value of window size, greater than or equal to \code{win}
 parameter used in \code{neqtl} function, so neighboring maximums will not
 share transcripts
 }
-  \item{n.max}{
-Number of maximums to find (e.g. for n.max=10, the top 10 positions of
+  \item{n.peaks}{
+Number of peaks to find (e.g. for n.peaks=10, the top 10 positions of
 maximum values)
 }
 }
@@ -45,8 +45,10 @@ Karl W. Broman and Aimee Teo Broman
 
 %%}
 
-%%\seealso{
-%%}
+\seealso{
+\code{\link{findpeaks.traits}}
+}
+
 \examples{
 data(multitrait)
 multitrait <- calc.genoprob(multitrait, step=2)
@@ -58,6 +60,6 @@ sigpos.multi <- maxlod.sigpos(maxlod.multi,sig.lod=4)
 n.multi <-
 neqtl(sigpos.multi,chr=scan.multi[,1],pos=scan.multi[,2],win=5)
 
-findmax(n.multi)
+findpeaks(n.multi)
 
 }

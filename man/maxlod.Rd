@@ -33,8 +33,8 @@ Returns list of
 Karl W. Broman and Aimee Teo Broman
 }
 \note{
- Output from is mainly used in subsequent functions \code{maxlod.sigpos},
-  \code{peaks}, and \code{findmax.traits}
+ Output from is mainly used in subsequent functions
+ \code{maxlod.sigpos},\code{peaks}, and \code{findpeaks.traits}
 }
 
 %% ~Make other sections like Warning with \section{Warning }{....} ~
@@ -42,7 +42,7 @@ Karl W. Broman and Aimee Teo Broman
 \seealso{
 \code{\link{maxlod.sigpos}}
 \code{\link{peaks}}
-\code{\link{findmax.traits}}
+\code{\link{findpeaks.traits}}
 }
 
 \examples{

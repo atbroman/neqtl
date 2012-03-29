@@ -1,5 +1,5 @@
-\name{findmax.traits}
-\alias{findmax.traits}
+\name{findpeaks.traits}
+\alias{findpeaks.traits}
 
 \title{
   List Traits with QTLs at genomic positions
@@ -8,7 +8,7 @@
   For a given vector of positions, list traits that map to those positions
 }
 \usage{
-findmax.traits(chr, pos, sigpos.out, maxlod.out, peaks.out, win = 5)
+findpeaks.traits(chr, pos, sigpos.out, maxlod.out, peaks.out, win = 5)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -37,7 +37,7 @@ Numeric value for window size; trait positions with significant LOD
 %}
 
 \note{
-  Use in conjunction with \code{findmax}
+  Use in conjunction with \code{findpeaks}
 }
 
 \value{
@@ -76,13 +76,13 @@ maxlod.multi <- maxlod(scan.multi)
 sigpos.multi <- maxlod.sigpos(maxlod.multi,sig.lod=4)
 
 ## Random position ##
-findmax.traits(chr=c("5","1"),pos=c(36,87),sigpos.multi)
+findpeaks.traits(chr=c("5","1"),pos=c(36,87),sigpos.multi)
 
-## Use findmax() ##
+## Use findpeaks() ##
 n.multi <- neqtl(sigpos.multi,chr=scan.multi[,1],pos=scan.multi[,2],win=5)
-x <- findmax(n.multi)
+x <- findpeaks(n.multi)
 
-findmax.traits(sigpos.multi,chr=x$chr,pos=x$pos)
+findpeaks.traits(sigpos.multi,chr=x$chr,pos=x$pos)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

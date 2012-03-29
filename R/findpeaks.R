@@ -1,9 +1,9 @@
 
-findmax <-
-function(neqtl.out, lodcolumn=1, window=5, n.max=10)
+findpeaks <-
+function(neqtl.out, lodcolumn=1, window=5, n.peaks=10)
 {
   neqtl.out$chr <- as.character(neqtl.out$chr)
-  for(i in 1:n.max) {
+  for(i in 1:n.peaks) {
     temp <- max(neqtl.out, lodcolumn=lodcolumn)
     if(length(temp[[3]])==0) break else{
     if(i==1) 

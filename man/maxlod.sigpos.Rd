@@ -43,7 +43,7 @@ Jansen, Risert ??
 \seealso{
   \code{\link{maxlod}}
   \code{\link{neqtl}}
-  \code{\link{findmax.traits}}
+  \code{\link{findpeaks.traits}}
   \code{\link{peaks}}
 }
 \examples{

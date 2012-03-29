@@ -1,7 +1,7 @@
 ## Find transcripts that map to a hotspot
 ## chr & pos are vectors of the same length
 ## chr must be as.character()
-findmax.traits <- function(chr,pos,sigpos.out,
+findpeaks.traits <- function(chr,pos,sigpos.out,
                          maxlod.out,
                          peaks.out,win=5){
   chr <- as.character(chr)
