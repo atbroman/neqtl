@@ -127,7 +127,7 @@ plotpeaks <- function(pos.peaks, map=NULL, n.col=256,
              rep(b[3],length(lticks)),
              b[1]+lticks*(b[2]-b[1]),
              rep(b[3]-0.5*(b[4]-b[3]),length(lticks)))
-      text(b[1]+c(lticks[1],lticks)*(b[2]-b[1]),
+      text(b[1]+lticks*(b[2]-b[1]),
          b[3]-rep(0.5,length(lticks))*(b[4]-b[3]),
          qi,adj=c(0.5,ifelse(diff(b[3:4])<0,0,1)),
          cex=lcex)
