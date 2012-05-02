@@ -5,8 +5,12 @@
 Smoothed count of traits mapping to positions across genome
 }
 \description{
-Counts the number of traits with significant maximum LOD scores at each
-position along the genome
+  Counts the number of positions within a window centered at a position
+  on a chromosome.
+  
+  Given a list of positions of significant LOD scores, counts the number
+  of traits with significant maximum LOD scores at a given set of
+  positions along the genome
 }
 \usage{
 neqtl(sigpos.out, chr, pos, win = 5)
@@ -16,6 +20,8 @@ neqtl(sigpos.out, chr, pos, win = 5)
   \item{sigpos.out}{
 Output from \code{\link{maxlod.sigpos}} function, a list of positions of
 significant maximum LOD scores
+
+Any list made up of a vector of positions for each chromosome.
 }
   \item{chr}{
 Vector of chromosomes (as a factor) for count, corresponding to pos,
