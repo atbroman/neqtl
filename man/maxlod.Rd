@@ -46,10 +46,9 @@ Karl W. Broman and Aimee Teo Broman
 }
 
 \examples{
-data(fake.bc)
-fake.bc <- calc.genoprob(fake.bc, step=2.5)
+data(fake.f2expr)
+fake.f2expr <- calc.genoprob(fake.f2expr, step=2.5)
 
-scanone.bc <- scanone(fake.bc,pheno.col=1:2)
-maxlod.bc <- maxlod(scanone.bc)
-
+scan.f2 <- scanone(fake.f2expr,pheno.col=1:20)
+maxlod.f2 <- maxlod(scan.f2)
 }

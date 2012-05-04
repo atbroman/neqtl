@@ -47,11 +47,11 @@ Jansen, Risert ??
   \code{\link{peaks}}
 }
 \examples{
-data(multitrait)
-multitrait <- calc.genoprob(multitrait, step=2)
+data(fake.f2expr)
+fake.f2expr <- calc.genoprob(fake.f2expr, step=2.5)
 
-scan.multi <- scanone(multitrait,pheno.col=1:nphe(multitrait))
-maxlod.multi <- maxlod(scan.multi)
-maxlod.sigpos(maxlod.multi,sig.lod=4)
+scan.f2 <- scanone(fake.f2expr,pheno.col=1:20)
+maxlod.f2 <- maxlod(scan.f2)
+maxlod.sigpos(maxlod.f2,sig.lod=3)
 
 }

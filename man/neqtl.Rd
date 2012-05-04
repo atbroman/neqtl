@@ -61,15 +61,15 @@ Karl W. Broman and Aimee Teo Broman
   \code{\link[qtl]{plot.scanone}}
 }
 \examples{
-data(multitrait)
-multitrait <- calc.genoprob(multitrait, step=2)
+data(fake.f2expr)
+fake.f2expr <- calc.genoprob(fake.f2expr, step=2.5)
 
-scan.multi <- scanone(multitrait,pheno.col=1:nphe(multitrait))
-maxlod.multi <- maxlod(scan.multi)
-sigpos.multi <- maxlod.sigpos(maxlod.multi,sig.lod=4)
+## pheno.col=1:nphe(fake.f2expr) takes awhile ##
+scan.f2 <- scanone(fake.f2expr,pheno.col=1:20)
+maxlod.f2 <- maxlod(scan.f2)
+sigpos.f2 <- maxlod.sigpos(maxlod.f2,sig.lod=3)
 
-n.multi <-
-neqtl(sigpos.multi,chr=scan.multi[,1],pos=scan.multi[,2],win=5)
-plot(n.multi)
+n.f2 <-neqtl(sigpos.f2,chr=scan.f2[,1],pos=scan.f2[,2],win=5)
+plot(n.f2)
 
 }
