@@ -49,8 +49,10 @@ peaks <- function(maxlod.out,sigpos.out,
                cbind(peaks.pos=pos,peaks.lod=lod),mxpos,mxlod)),
        row.names=NULL,stringsAsFactors=FALSE)
   
-  peaks <- rbind(cbind(maxpos.unlist(mxpos.cis,mxlod.cis),cis=1),
-                    cbind(maxpos.unlist(mxpos.trans,mxlod.trans),cis=0))
+  peaks <- rbind(cbind(x <- maxpos.unlist(mxpos.cis,mxlod.cis),
+                 cis=rep(1,nrow(x))),
+                 cbind(x <- maxpos.unlist(mxpos.trans,mxlod.trans),
+                 cis=rep(0,nrow(x))))
   peaks[,paste("trait",c("chr","pos"),sep=".")] <-
           annot[match(peaks$id,rownames(annot)),]
   

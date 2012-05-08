@@ -68,21 +68,21 @@ Numeric value for window size; trait positions with significant LOD
 %% ~~objects to See Also as \code{\link{help}}, ~~~
 %}
 \examples{
-data(multitrait)
-multitrait <- calc.genoprob(multitrait, step=2)
+data(fake.f2expr)
+fake.f2expr <- calc.genoprob(fake.f2expr)
 
-scan.multi <- scanone(multitrait,pheno.col=1:nphe(multitrait))
-maxlod.multi <- maxlod(scan.multi)
-sigpos.multi <- maxlod.sigpos(maxlod.multi,sig.lod=4)
+scan.f2 <- scanone(fake.f2expr,pheno.col=1:100)
+maxlod.f2 <- maxlod(scan.f2)
+sigpos.f2 <- maxlod.sigpos(maxlod.f2,sig.lod=3)
 
 ## Random position ##
-findpeaks.traits(chr=c("5","1"),pos=c(36,87),sigpos.multi)
+findpeaks.traits(chr=c("5","1"),pos=c(36,87),sigpos.f2)
 
 ## Use findpeaks() ##
-n.multi <- neqtl(sigpos.multi,chr=scan.multi[,1],pos=scan.multi[,2],win=5)
-x <- findpeaks(n.multi)
+n.f2 <- neqtl(sigpos.f2,chr=scan.f2[,1],pos=scan.f2[,2],win=5)
+x <- findpeaks(n.f2)
 
-findpeaks.traits(sigpos.multi,chr=x$chr,pos=x$pos)
+findpeaks.traits(sigpos.f2,chr=x$chr,pos=x$pos)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

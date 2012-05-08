@@ -75,17 +75,16 @@ Karl W. Broman and Aimee Teo Broman
   \code{\link{plotpeaks}}
 }
 \examples{
-data(fake.bc)
-fake.bc <- calc.genoprob(fake.bc, step=2.5)
+data(fake.f2expr)
+fake.f2expr <- calc.genoprob(fake.f2expr)
+
+scan.f2 <- scanone(fake.f2expr,pheno.col=1:100)
+maxlod.f2 <- maxlod(scan.f2)
+sigpos.f2 <- maxlod.sigpos(maxlod.f2,sig.lod=3)
 
 ## Fake annotation ##
-annot.bc <- data.frame(chr=factor(c("5","1"),levels=names(fake.bc$geno)),pos=c(20,10))
-row.names(annot.bc) <- c("pheno1","pheno2")
+data(fake.annot)
 
-scanone.bc <- scanone(fake.bc,pheno.col=1:2)
-maxlod.bc <- maxlod(scanone.bc)
-sig.bc <- maxlod.sigpos(maxlod.bc,sig.lod=3)
-
-peaks.bc <- peaks(maxlod.bc,sig.bc,annot.bc)
+peaks.f2 <- peaks(maxlod.f2,sigpos.f2,fake.annot)
 
 }

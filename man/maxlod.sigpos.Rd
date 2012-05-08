@@ -48,9 +48,9 @@ Jansen, Risert ??
 }
 \examples{
 data(fake.f2expr)
-fake.f2expr <- calc.genoprob(fake.f2expr, step=2.5)
+fake.f2expr <- calc.genoprob(fake.f2expr)
 
-scan.f2 <- scanone(fake.f2expr,pheno.col=1:20)
+scan.f2 <- scanone(fake.f2expr,pheno.col=1:100)
 maxlod.f2 <- maxlod(scan.f2)
 maxlod.sigpos(maxlod.f2,sig.lod=3)
 

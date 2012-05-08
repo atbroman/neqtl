@@ -84,26 +84,19 @@ Brian Yandell and Aimee Teo Broman
   \code{\link[qtlview]{cistrans}} (from qtlview library)
 }
 \examples{
-data(fake.bc)
-fake.bc <- calc.genoprob(fake.bc, step=2.5)
+data(fake.f2expr)
+fake.f2expr <- calc.genoprob(fake.f2expr, step=5,
+    stepwidth="max",map.function="c-f")
+
+scan.f2 <- scanone(fake.f2expr,pheno.col=1:100)
+maxlod.f2 <- maxlod(scan.f2)
+sigpos.f2 <- maxlod.sigpos(maxlod.f2,sig.lod=3)
 
 ## Fake annotation ##
-annot.bc <- data.frame(chr=factor(c("5","1"),
-            levels=names(fake.bc$geno)),pos=c(20,10))
-row.names(annot.bc) <- c("pheno1","pheno2")
+data(fake.annot)
 
-scanone.bc <- scanone(fake.bc,pheno.col=1:2)
-maxlod.bc <- maxlod(scanone.bc)
-sig.bc <- maxlod.sigpos(maxlod.bc,sig.lod=3)
+peaks.f2 <- peaks(maxlod.f2,sigpos.f2,fake.annot)
 
-peaks.bc <- peaks(maxlod.bc,sig.bc,annot.bc)
-
-plotpeaks(peaks.bc$peaks)
-
-## Using qtlview ##
-#peaks <-peaks.bc$peaks
-#names(peaks)[c(2:4,7)] <- c("peak.chr","peak.pos.cM","peak.score","trait.pos.cM")
-#plot(cistrans(peaks,cross.name="fake.bc",
-#   maps=list(Mb.map=pull.map(fake.bc),cM.map=pull.map(fake.bc))))
+plotpeaks(peaks.f2$peaks)
 
 }

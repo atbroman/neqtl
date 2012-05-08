@@ -32,7 +32,8 @@ plotpeaks <- function(pos.peaks, map=NULL, n.col=256,
      }
     if(is.numeric(get(paste("chr",i,sep="."))))
       assign(paste("chr",i,sep="."),as.character(get(paste("chr",i,sep="."))))
-    if(any(is.na(match(get(paste("clab",i,sep=".")),get(paste("chr",i,sep="."))))))
+    if(any(is.na(match(get(paste("clab",i,sep=".")),
+                       get(paste("chr",i,sep="."))))))
       stop(paste("clab.",i," must be a subset of chr.",i,sep=""))
   }
   if(any(is.na(pos.peaks$trait.pos))){
