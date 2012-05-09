@@ -18,7 +18,6 @@
   expression trait
 }
 \examples{
-data(fake.annot)
 \dontrun{
 library(qtl)
 
@@ -60,14 +59,16 @@ trans.eff <- runif(n.genes, 0.2, 0.9)
 trans.eff[!trans] <- 0
 
 # simulate annotation
-chr <- factor(sample(names(L), n.genes, prob=L/sum(L), repl=TRUE), levels=1:19)
-pos <- runif(n.genes, 0, L[chr])
-fake.annot <- cbind(chr,pos)
-rownames(fake.annot) <- genenam
-fake.annot[cis,] <- c(genes[cis,"chr"],genes[cis,"pos"]+
-                 runif(sum(cis),min=-5,max=5))
+fake.annot <- data.frame(chr=factor(sample(names(L),
+           n.genes, prob=L/sum(L), repl=TRUE), levels=1:19),
+           pos=runif(n.genes, 0, L[chr]),row.names=genenam)
+fake.annot[cis,"chr"] <- genes[cis,"chr"]
+fake.annot[cis,"pos"] <-
+  apply(cbind(genes[cis,"pos"]+runif(sum(cis),min=-2.5,max=2.5),
+        L[genes[cis,"chr"]]),1,function(x) max(0,min(x)))
 
-save(fake.annot,file="neqtl/data/fake.annot.RData")
+#save(fake.annot,file="neqtl/data/fake.annot.RData")
 }
+data(fake.annot)
 }
 \keyword{datasets}

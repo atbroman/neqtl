@@ -96,7 +96,8 @@ peaks.f2 <- peaks(maxlod.f2,sigpos.f2,fake.annot)
 cisnam <- peaks.f2$peaks$id[peaks.f2$peaks$cis==1]
 # unlist(sapply(peaks.f2$maxpos.cis,names))
 
-imagelods(scan.f2,lodcolumn=1:100,threshold.lod=3,annot=fake.annot)
+imagelods(scan.f2,lodcolumn=1:100,threshold.lod=3,
+   cisnam=cisnam,annot=fake.annot)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the
 % R documentation directory.

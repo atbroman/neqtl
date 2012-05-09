@@ -60,6 +60,17 @@ cis.eff[!cis] <- 0
 trans.eff <- runif(n.genes, 0.2, 0.9)
 trans.eff[!trans] <- 0
 
+# simulate annotation
+fake.annot <- data.frame(chr=factor(sample(names(L),
+           n.genes, prob=L/sum(L), repl=TRUE), levels=1:19),
+           pos=runif(n.genes, 0, L[chr]),row.names=genenam)
+fake.annot[cis,"chr"] <- genes[cis,"chr"]
+fake.annot[cis,"pos"] <-
+  apply(cbind(genes[cis,"pos"]+runif(sum(cis),min=-2.5,max=2.5),
+        L[genes[cis,"chr"]]),1,function(x) max(0,min(x)))
+
+#save(fake.annot,file="neqtl/data/fake.annot.RData")
+
 # simulate cross; qtl for all cis locations plus the one trans QTL
 n.ind <- 500
 x <- sim.cross(map10,
@@ -92,7 +103,7 @@ colnames(pheno) <- genenam
 x$pheno <- as.data.frame(pheno)
 
 fake.f2expr <- x
-save(fake.f2expr,file="../data/fake.f2expr.RData")
+#save(fake.f2expr,file="neqtl/data/fake.f2expr.RData")
 }
 
 data(fake.f2expr)
