@@ -85,8 +85,7 @@ Brian Yandell and Aimee Teo Broman
 }
 \examples{
 data(fake.f2expr)
-fake.f2expr <- calc.genoprob(fake.f2expr, step=5,
-    stepwidth="max",map.function="c-f")
+fake.f2expr <- calc.genoprob(fake.f2expr)
 
 scan.f2 <- scanone(fake.f2expr,pheno.col=1:100)
 maxlod.f2 <- maxlod(scan.f2)
