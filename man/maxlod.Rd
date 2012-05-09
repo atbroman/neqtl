@@ -49,6 +49,6 @@ Karl W. Broman and Aimee Teo Broman
 data(fake.f2expr)
 fake.f2expr <- calc.genoprob(fake.f2expr)
 
-scan.f2 <- scanone(fake.f2expr,pheno.col=1:100)
+scan.f2 <- scanone(fake.f2expr,pheno.col=1:100, method="hk")
 maxlod.f2 <- maxlod(scan.f2)
 }
