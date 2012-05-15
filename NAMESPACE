@@ -8,7 +8,7 @@ export(findpeaks)
 export(findpeaks.traits)
 export(peaks)
 export(plotpeaks)
-export(imagelods,hc.ord)
+export(image.scanone,hc.ord)
 
 # functions to import
 importFrom(stats, rnorm)

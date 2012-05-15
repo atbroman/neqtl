@@ -1,5 +1,5 @@
-\name{imagelods}
-\alias{imagelods}
+\name{image.scanone}
+\alias{image.scanone}
 
 \title{
 Heatmap of scanone object
@@ -9,7 +9,7 @@ Heatmap of scanone object; useful for a subset of expression traits
 (<100).
 }
 \usage{
-imagelods(x,chr = levels(x$chr), lodcolumn = sample(1:(ncol(x)-2),100), n.col = 256, allow.neg = FALSE, threshold.lod = 0, cluster = TRUE, bwd = 0.001, annot, cisnam, ...)
+image.scanone(x,chr = levels(x$chr), lodcolumn = sample(1:(ncol(x)-2),100), n.col = 256, allow.neg = FALSE, threshold.lod = 0, cluster = TRUE, bwd = 0.001, annot, cisnam, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -96,7 +96,7 @@ peaks.f2 <- peaks(maxlod.f2,sigpos.f2,fake.annot)
 cisnam <- peaks.f2$peaks$id[peaks.f2$peaks$cis==1]
 # unlist(sapply(peaks.f2$maxpos.cis,names))
 
-imagelods(scan.f2,lodcolumn=1:100,threshold.lod=3,
+image.scanone(scan.f2,lodcolumn=1:100,threshold.lod=3,
    cisnam=cisnam,annot=fake.annot)
 }
 % Add one or more standard keywords, see file 'KEYWORDS' in the

@@ -17,7 +17,7 @@ hc.ord <- function(lods,cluster=TRUE){
 ## annot is chr & pos of traits with rownames of traits ##
 ## cisnam is a vector of trait names that are CIS traits, use
 ## unlist(sapply(peaks.out$maxpos.cis,names))
-imagelods <- function (x,
+image.scanone <- function (x,
     chr = levels(x$chr),
     lodcolumn = sample(1:(ncol(x)-2),100),
     n.col = 256,
