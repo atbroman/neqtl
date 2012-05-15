@@ -54,7 +54,7 @@ Returns a list corresponding to the number of chromosomes:
  \item{maxlods.trans}{List of maximum LOD scores, named by trait,
    outside of +/- 1/2 window size, or on different chromosome of
    annotation location} 
- \item{maxprobe}{List of annotation positions, named by trait}
+ \item{maxpos.trait}{List of annotation positions, named by trait}
  \item{peaks}{\code{data.frame} of traits with maximum lod score (by
    chromosome) higher than a significance threshold (as defined in
    \code{\link{maxlod.sigpos}}), columns named "peaks" refer
