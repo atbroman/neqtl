@@ -96,6 +96,6 @@ data(fake.annot)
 
 peaks.f2 <- peaks(maxlod.f2,sigpos.f2,fake.annot)
 
-plotpeaks(peaks.f2$peaks)
+plotpeaks(peaks.f2$peaks,map=pull.map(fake.f2expr))
 
 }
