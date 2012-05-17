@@ -9,7 +9,7 @@ Heatmap of scanone object; useful for a subset of expression traits
 (<100).
 }
 \usage{
-image.scanone(x,chr = levels(x$chr), lodcolumn = sample(1:(ncol(x)-2),100), n.col = 256, allow.neg = FALSE, threshold.lod = 0, cluster = TRUE, bwd = 0.001, annot, cisnam, ...)
+image.scanone(x,chr = levels(x$chr), lodcolumn = 1:min(ncol(x)-2,100), n.col = 256, allow.neg = FALSE, threshold.lod = 0, cluster = TRUE, bwd = 0.001, annot, cisnam, ...)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -23,7 +23,7 @@ character vector referring to chromosomes by name
   \item{lodcolumn}{
 A vector of integers indicating which of the LOD score columns to plot.
 Although the number of columns is suggested to be <100, larger numbers
-are allowed, although will take longer to plot, and names not readable.
+are allowed.
 }
   \item{n.col}{
 Number of colors / bins to use for LOD scores

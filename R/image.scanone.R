@@ -19,7 +19,7 @@ hc.ord <- function(lods,cluster=TRUE){
 ## unlist(sapply(peaks.out$maxpos.cis,names))
 image.scanone <- function (x,
     chr = levels(x$chr),
-    lodcolumn = sample(1:(ncol(x)-2),100),
+    lodcolumn = 1:min(ncol(x)-2,100),
     n.col = 256,
     allow.neg = FALSE,
     threshold.lod=0,

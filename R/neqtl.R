@@ -32,7 +32,10 @@ function(themax, thepos, window=5)
   o <- order(temploc)
   temploc <- temploc[o]
   tempval <- tempval[o]
-  smoothed <- runningmean(temploc, tempval, at=theloc, window=window, what="sum") 
-  u <- unique(theloc)
-  return(cbind(pos=u, smoothed[match(u, theloc)]))
+  smoothed <- runningmean(temploc, tempval, at=theloc, window=window, what="sum")
+  ## removed 5/17/12 BY, ATB
+  #u <- unique(theloc)
+  #return(cbind(pos=u, smoothed[match(u, theloc)]))
+  u <- match(thepos,theloc)
+  return(cbind(pos=thepos, smoothed[u]))
 }
