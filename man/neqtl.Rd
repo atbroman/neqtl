@@ -13,7 +13,7 @@ Smoothed count of traits mapping to positions across genome
   positions along the genome
 }
 \usage{
-neqtl(sigpos.out, chr, pos, win = 5)
+neqtl(sigpos.out, chr, pos, win = 5, matchpos=FALSE)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -35,6 +35,11 @@ column of scanone object
 Numeric value of window size, count will be number of traits with
 significant maximum LOD score within the window, centered at
 c(chr,pos)}
+  \item{matchpos}{
+Logical; if TRUE, will return exactly the positions inputted in
+\code{pos}; if FALSE, will fill positions with locations 0.2 units
+apart.
+}
 }
 %\details{
 %%  ~~ If necessary, more details than the description above ~~

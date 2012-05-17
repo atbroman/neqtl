@@ -1,6 +1,14 @@
 
-neqtl <- function(sigpos.out,chr,pos,win=5)
-     smoothall(sigpos.out,chr,pos,window=win)
+neqtl <- function(sigpos.out,chr,pos,win=5,matchpos=FALSE){
+     out <- smoothall(sigpos.out,chr,pos,window=win)
+     if(matchpos==TRUE){
+       outmatch <- NULL
+       for(i in levels(chr))
+         outmatch <- rbind(outmatch,
+            out[out[,1]==i,][match(pos[chr==i],out[out[,1]==i,2]),])
+       return(outmatch)
+     } else return(out)
+   }
 
 smoothall <-
 function(themax, thechr, thepos, window=5)
@@ -33,9 +41,6 @@ function(themax, thepos, window=5)
   temploc <- temploc[o]
   tempval <- tempval[o]
   smoothed <- runningmean(temploc, tempval, at=theloc, window=window, what="sum")
-  ## removed 5/17/12 BY, ATB
-  #u <- unique(theloc)
-  #return(cbind(pos=u, smoothed[match(u, theloc)]))
-  u <- match(thepos,theloc)
-  return(cbind(pos=thepos, smoothed[u]))
+  u <- unique(theloc)
+  return(cbind(pos=u, smoothed[match(u, theloc)]))
 }
