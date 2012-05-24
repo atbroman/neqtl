@@ -1,14 +1,6 @@
 
-neqtl <- function(sigpos.out,chr,pos,win=5,matchpos=FALSE){
-     out <- smoothall(sigpos.out,chr,pos,window=win)
-     if(matchpos==TRUE){
-       outmatch <- NULL
-       for(i in levels(chr))
-         outmatch <- rbind(outmatch,
-            out[out[,1]==i,][match(pos[chr==i],out[out[,1]==i,2]),])
-       return(outmatch)
-     } else return(out)
-   }
+neqtl <- function(sigpos.out,chr,pos,win=5)
+     smoothall(sigpos.out,chr,pos,window=win)
 
 smoothall <-
 function(themax, thechr, thepos, window=5)
@@ -30,6 +22,8 @@ function(themax, thechr, thepos, window=5)
 
 ## Uses postions from thepos for smoothing: ATB 9/10/09 ##
 ## In theloc by=0.2 was outside the seq() function--moved it inside  ATB 12/15/09 ##
+## removed  u <- unique(theloc), theloc already unique ATB 5/24/12 ##
+
 smoothchr <-
 function(themax, thepos, window=5)
 {
@@ -40,7 +34,7 @@ function(themax, thepos, window=5)
   o <- order(temploc)
   temploc <- temploc[o]
   tempval <- tempval[o]
-  smoothed <- runningmean(temploc, tempval, at=theloc, window=window, what="sum")
-  u <- unique(theloc)
-  return(cbind(pos=u, smoothed[match(u, theloc)]))
+  smoothed <- runningmean(temploc, tempval,
+                 at=theloc,window=window, what="sum")
+  return(cbind(theloc, smoothed))
 }
