@@ -1,6 +1,6 @@
 Package: neqtl
-Version: 0.01-12
-Date: 16 May 2012
+Version: 0.01-13
+Date: 26 Sept 2012
 Title: Tools for analyzing expression QTL by position on genome
 Author: Karl W Broman <kbroman@biostat.wisc.edu>, Brian Yandell, and Aimee Teo Broman 
 Maintainer: Aimee Teo Broman <abroman@biostat.wisc.edu>
