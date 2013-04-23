@@ -133,9 +133,8 @@ image.scanone <- function (x,
     c(0,max(strwidth(label4,units="inch"))/par("csi"),0)
   axis(side = 4, at= 1:ncol(lod),
     labels = label4 ,las=1, mgp=rmgp,hadj=1, ...)
-  a <- par("usr")
-  mtext("LOD",side=3,adj=1,
-    at=a[2]+rmgp[2]*par("cxy")[1]*par("cin")[2]/par("cin")[1], ...)
+  axis(side = 4, at=1.04*(ncol(lod)-1),tick=FALSE,
+       labels="LOD",las=1,mgp=rmgp,hadj=1,padj=0,xpd=TRUE, ...)
 
   par(mai=mai.orig)
 }
