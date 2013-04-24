@@ -26,7 +26,10 @@ image.scanone <- function (x,
     cluster=TRUE,
     bwd=0.001,
     annot,
-    cisnam, ...){ 
+    cisnam, ...){
+
+  dots <- list(...)
+  
   if(!is.factor(x$chr)) x$chr <- factor(x$chr,levels=unique(x$chr))
   # pull out desired chromosomes
   chr <- qtl:::matchchr(chr, unique(x[,1]))
@@ -78,8 +81,10 @@ image.scanone <- function (x,
             function(x) round(max(x,na.rm=TRUE),1)))
   
   mai.orig <- mai <- par("mai")
-  mai[2] <- mai[4]+max(strwidth(label2,units="inch"))
-  mai[4] <- mai[4]+max(strwidth(label4,units="inch"))
+  cex.axis <- if(!is.na(match("cex.axis",names(dots))))
+    dots$cex.axis else NULL
+  mai[2] <- mai[4]+max(strwidth(label2,units="inch",cex=cex.axis))
+  mai[4] <- mai[4]+max(strwidth(label4,units="inch",cex=cex.axis))
   par(mai=mai)
 
   if(length(chr)>1){
@@ -130,7 +135,7 @@ image.scanone <- function (x,
          tick=FALSE,lty=0,las=1, ...)
     }
   rmgp <- par("mgp")+
-    c(0,max(strwidth(label4,units="inch"))/par("csi"),0)
+    c(0,max(strwidth(label4,units="inch",cex=cex.axis))/par("csi"),0)
   axis(side = 4, at= 1:ncol(lod),
     labels = label4 ,las=1, mgp=rmgp,hadj=1, ...)
   axis(side = 4, at=1.04*(ncol(lod)-1),tick=FALSE,
