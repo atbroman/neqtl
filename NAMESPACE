@@ -16,4 +16,4 @@ importFrom(stats, hclust)
 importFrom(stats, dist)
 importFrom(qtl, scanone)
 importFrom(graphics, image)
-
+importFrom(graphics, strwidth)
