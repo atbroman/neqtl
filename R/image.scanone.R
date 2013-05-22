@@ -138,8 +138,8 @@ image.scanone <- function (x,
     c(0,max(strwidth(label4,units="inch",cex=cex.axis))/par("csi"),0)
   axis(side = 4, at= 1:ncol(lod),
     labels = label4 ,las=1, mgp=rmgp,hadj=1, ...)
-  axis(side = 4, at=1.04*(ncol(lod)-1),tick=FALSE,
-       labels="LOD",las=1,mgp=rmgp,hadj=1,padj=0,xpd=TRUE, ...)
+  axis(side = 4, at=ncol(lod)+0.5, tick=FALSE,
+       labels="LOD",las=1,mgp=rmgp,hadj=1,padj=-0.05,xpd=TRUE, ...)
 
   par(mai=mai.orig)
 }
