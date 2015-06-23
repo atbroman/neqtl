@@ -7,4 +7,4 @@ Maintainer: Aimee Teo Broman <abroman@biostat.wisc.edu>
 Depends: R (>= 2.10.0), utils, graphics, stats, qtl
 Description: Functions to determine significant QTL, count of QTL across genome, identify CIS/trans expression traits
 License: GPL-3
-URL: http://www.biostat.wisc.edu/~kbroman/software
+URL: https://github.com/atbroman/neqtl
