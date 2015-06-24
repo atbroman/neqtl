@@ -32,8 +32,8 @@ image.scanone <- function (x,
   
   if(!is.factor(x$chr)) x$chr <- factor(x$chr,levels=unique(x$chr))
   # pull out desired chromosomes
-  chr <- qtl:::matchchr(chr, unique(x[,1]))
-  
+  chr <- qtl::matchchr(chr, unique(x[,1]))
+
   ## Colors ##
   cols <- rev(rainbow(n.col, start = 0, end = 2/3))
   
