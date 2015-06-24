@@ -66,7 +66,7 @@ This is a simulated expression cross, with 500 individuals, and 1000
 expression traits.
 
 In this analysis we define a QTL position to be the position of the
-maximum LOD score on a chromsome for LOD greater than a specified
+maximum LOD score on a chromosome for LOD greater than a specified
 threshold.
 
 \section{Setup}
@@ -127,8 +127,8 @@ The \code{neqtl} function counts the number of QTL within a specified
 window, centered at each position, usually positions output by \code{scanone}.
 
 <<neqtl>>=
-neqtl.out <- neqtl(sigpos.out,chr=out.f2[,1],pos=out.f2[,2],win=5)
-@ 
+neqtl.out <- neqtl(sigpos.out,chr=out.f2[,f2[,2],win=5)
+@
 
 <<fig=TRUE,height=4,width=8>>=
 plot(neqtl.out)
@@ -202,7 +202,7 @@ hot.traits[1:10,]
 
 \section{Heatmap of \code{scanone} object}
 
-The \code{image.scanone} function is an extention of the
+The \code{image.scanone} function is an extension of the
 \code{plot.scanone} function for the purposes of plotting the scanone
 output of a large number of traits.  The plot works best for n<100
 traits; for more traits than this, plot on separate pages. It is
