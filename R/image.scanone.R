@@ -29,14 +29,14 @@ image.scanone <- function (x,
     cisnam, ...){
 
   dots <- list(...)
-  
+
   if(!is.factor(x$chr)) x$chr <- factor(x$chr,levels=unique(x$chr))
   # pull out desired chromosomes
   chr <- qtl::matchchr(chr, unique(x[,1]))
 
   ## Colors ##
   cols <- rev(rainbow(n.col, start = 0, end = 2/3))
-  
+
   ## Subset first ##
   chrpos <- droplevels(x[x$chr %in% chr,1:2])
   lod <- x[x$chr %in% chr, lodcolumn+2, drop = FALSE]
@@ -59,7 +59,7 @@ image.scanone <- function (x,
   lod <- lod[,apply(lod,2,function(x,tl)
     ifelse(length(x)>0,ifelse(all(is.na(x)),FALSE,
            max(x,na.rm=TRUE)>=tl),FALSE),threshold.lod),drop=FALSE]
-  
+
   if(ncol(lod) == 0){
     print(paste("No traits with LOD above",threshold.lod))
     return()
@@ -73,13 +73,13 @@ image.scanone <- function (x,
 
   if(!missing(annot))
     annot <- annot[annot[,1] %in% chr,]
-  
+
   label2 <- colnames(lod)
 # label4 <- sprintf("%.1f",apply(lod,2,
 #           function(x) round(max(x,na.rm=TRUE),1)))
   label4 <- format(apply(lod,2,
             function(x) round(max(x,na.rm=TRUE),1)))
-  
+
   mai.orig <- mai <- par("mai")
   cex.axis <- if(!is.na(match("cex.axis",names(dots))))
     dots$cex.axis else NULL
@@ -102,10 +102,10 @@ image.scanone <- function (x,
     ppos$cumpos <- ppos$pos0+ccum[ppos$chr]
     pplod <- as.matrix(do.call(rbind,by(plod,chrpos$chr,
               function(x) rbind(x,rep(NA,ncol(x))))))
-    
+
     image(ppos$cumpos[-nrow(ppos)], 1:ncol(pplod),
           pplod[-nrow(pplod),], ylab = "", xlab = "Chromosome",
-        col = cols, xaxt="n",yaxt = "n") 
+        col = cols, xaxt="n",yaxt = "n")
     axis(side = 1, at = ccum[2:(length(ccum)-1)]-bwd/2, tck=1,
          labels=FALSE, ...)
     axis(side = 1, at = ccum[-length(ccum)]+(clen+bwd)/2,
@@ -143,4 +143,3 @@ image.scanone <- function (x,
 
   par(mai=mai.orig)
 }
-
