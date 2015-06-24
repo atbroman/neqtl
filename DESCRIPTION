@@ -1,10 +1,11 @@
 Package: neqtl
-Version: 0.01-14
-Date: 5 March 2014
+Version: 0.01-15
+Date: 2016-06-24
 Title: Tools for analyzing expression QTL by position on genome
 Author: Aimee Teo Broman <abroman@biostat.wisc.edu>, Karl W Broman <kbroman@biostat.wisc.edu>, and Brian Yandell
 Maintainer: Aimee Teo Broman <abroman@biostat.wisc.edu>
 Depends: R (>= 2.10.0), utils, graphics, stats, qtl
-Description: Functions to determine significant QTL, count of QTL across genome, identify CIS/trans expression traits
+Description: Functions to determine significant QTL, count of QTL
+  across genome, identify CIS/trans expression traits.
 License: GPL-3
 URL: https://github.com/atbroman/neqtl

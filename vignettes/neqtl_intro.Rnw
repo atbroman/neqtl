@@ -66,7 +66,7 @@ This is a simulated expression cross, with 500 individuals, and 1000
 expression traits.
 
 In this analysis we define a QTL position to be the position of the
-maximum LOD score on a chromsome for LOD greater than a specified
+maximum LOD score on a chromosome for LOD greater than a specified
 threshold.
 
 \section{Setup}
@@ -127,13 +127,13 @@ The \code{neqtl} function counts the number of QTL within a specified
 window, centered at each position, usually positions output by \code{scanone}.
 
 <<neqtl>>=
-neqtl.out <- neqtl(sigpos.out,chr=out.f2[,1],pos=out.f2[,2],win=5)
-@ 
+neqtl.out <- neqtl(sigpos.out,chr=out.f2[,f2[,2],win=5)
+@
 
 <<fig=TRUE,height=4,width=8>>=
 plot(neqtl.out)
 title("Number of traits with significant max LOD")
-@ 
+@
 
 \section{Proximal and Distal traits}
 
@@ -155,41 +155,41 @@ First, load the annotation file for the expression traits.
 
 <<annotation>>=
 data(fake.annot)
-@ 
+@
 
 The \code{peaks} function outputs a list with 10 elements, defining
 traits that have significant peaks near their annotated position.
 Only traits that have positions listed in the \code{annot} data.frame
-will be in the output. 
+will be in the output.
 
 <<peaks>>=
 peaks.out <- peaks(maxlod.out,sigpos.out,annot=fake.annot,win=5)
-@ 
+@
 
 The \code{peaks} element of the output is a data.frame with
 information from the \code{cis}, and \code{trans} list elements.
 
 <<unlistpeaks>>=
 peaks.out$peaks[1:10,]
-@ 
+@
 
 The \code{plotpeaks} function produces a plot of QTL position
 vs. annotation position.
 
 <<fig=TRUE,height=8,width=8>>=
 plotpeaks(peaks.out$peaks,map=pull.map(fake.f2expr))
-@ 
+@
 
 \section{Positions with maximal number of QTL}
-  
+
 The \code{findpeaks} function uses output from the \code{neqtl}
 function and finds the positions where the highest number of QTL
-occur.  
+occur.
 
 <<findpeaks>>=
 hot.pos <- findpeaks(neqtl.out,n.peaks=5)
 hot.pos
-@ 
+@
 
 The \code{findpeaks.traits} function will list all traits that have
 QTL within a \code{win} range of the given positions.
@@ -198,11 +198,11 @@ QTL within a \code{win} range of the given positions.
 hot.traits <- findpeaks.traits(chr=hot.pos[,1],pos=hot.pos[,2],
               sigpos.out,maxlod.out,peaks.out)
 hot.traits[1:10,]
-@ 
+@
 
 \section{Heatmap of \code{scanone} object}
 
-The \code{image.scanone} function is an extention of the
+The \code{image.scanone} function is an extension of the
 \code{plot.scanone} function for the purposes of plotting the scanone
 output of a large number of traits.  The plot works best for n<100
 traits; for more traits than this, plot on separate pages. It is
@@ -211,7 +211,7 @@ are associated with a certain function).
 
 <<fig=TRUE,height=10,width=10>>=
 image.scanone(out.f2,lodcolumn=1:50)
-@ 
+@
 
 Annotation positions may be added to the plot, as well an indicator
 for proximal traits, from the \code{peaks} function.  The
@@ -221,11 +221,10 @@ score above \code{threshold.lod} in the figure.
 <<cisannot>>=
 cisnames <- unlist(sapply(peaks.out$maxpos.cis,names))
 cisnames[1:10]
-@ 
+@
 <<fig=TRUE,height=5,width=10>>=
 image.scanone(out.f2,lodcolumn=1:50,annot=fake.annot,cisnam=cisnames,
               threshold.lod=sig.lod)
-@ 
+@
 
 \end{document}
-
