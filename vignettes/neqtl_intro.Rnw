@@ -127,7 +127,7 @@ The \code{neqtl} function counts the number of QTL within a specified
 window, centered at each position, usually positions output by \code{scanone}.
 
 <<neqtl>>=
-neqtl.out <- neqtl(sigpos.out,chr=out.f2[,f2[,2],win=5)
+neqtl.out <- neqtl(sigpos.out,chr=out.f2[,1],pos=out.f2[,2],win=5)
 @
 
 <<fig=TRUE,height=4,width=8>>=
