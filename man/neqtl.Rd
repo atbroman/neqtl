@@ -13,7 +13,7 @@ Smoothed count of traits mapping to positions across genome
   positions along the genome
 }
 \usage{
-neqtl(sigpos.out, chr, pos, win = 5)
+neqtl(sigpos.out, chr, pos, win = 5, inc = 0.2)
 }
 %- maybe also 'usage' for other objects documented here.
 \arguments{
@@ -35,6 +35,8 @@ column of scanone object
 Numeric value of window size, count will be number of traits with
 significant maximum LOD score within the window, centered at
 c(chr,pos)}
+  \item{inc}{
+Numeric value of step increment between positions, default is 0.2}
 }
 
 %\details{
@@ -70,7 +72,7 @@ scan.f2 <- scanone(fake.f2expr,pheno.col=1:100, method="hk")
 maxlod.f2 <- maxlod(scan.f2)
 sigpos.f2 <- maxlod.sigpos(maxlod.f2,sig.lod=3)
 
-n.f2 <-neqtl(sigpos.f2,chr=scan.f2[,1],pos=scan.f2[,2],win=5)
+n.f2 <-neqtl(sigpos.f2,chr=scan.f2[,1],pos=scan.f2[,2])
 plot(n.f2)
 
 }
